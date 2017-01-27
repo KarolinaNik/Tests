@@ -32,9 +32,9 @@ public class Login {
         wait.until(titleIs("Log in"));
         driver.findElement(By.id("UserName")).sendKeys("alexandra.ilianova@imparta.com");
         driver.findElement(By.id("Password")).sendKeys("AZsxdc1234");
-        //driver.findElement(By.cssSelector("btn.btn-success.btn-block")).click();
+        //class name = "btn btn-success btn-block", Webdriver problem with spaces inside class names
+        driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();
 
-        //btn btn-success btn-block
     }
 
     /*   @Test
