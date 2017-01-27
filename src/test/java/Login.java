@@ -1,4 +1,5 @@
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -32,13 +33,17 @@ public class Login {
         wait.until(titleIs("Log in"));
         driver.findElement(By.id("UserName")).sendKeys("alexandra.ilianova@imparta.com");
         driver.findElement(By.id("Password")).sendKeys("AZsxdc1234");
-        //class name = "btn btn-success btn-block", Webdriver problem with spaces inside class names
-        driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();
+        driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();  //class name = "btn btn-success btn-block", Webdriver problem with spaces inside class names
+        driver.findElement(By.cssSelector("span.hidden-xs.usersFullname"));
+        //Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
 
+        //driver.findElement(By.linkText("Admin")).click();
+        //driver.findElement(By.cssSelector("span.").click();
     }
 
+
     /*   @Test
-    //Поиск в гугле
+    //Search in google
           public void myFirstTest() {
            driver.navigate().to("http://www.google.com");
            driver.findElement(By.name("q")).sendKeys("webdriver");
