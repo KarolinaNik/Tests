@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
 /**
@@ -19,21 +20,32 @@ public class Login {
     private WebDriverWait wait;
 
     @Before
-    public void start () {
-        System.setProperty("webdriver.chrome.driver","C:\\Tools\\selenium drivers\\chromedriver.exe");
+    public void start() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Tools\\selenium drivers\\chromedriver.exe");
         driver = new ChromeDriver();
-        wait = new WebDriverWait (driver, 30);
+        wait = new WebDriverWait(driver, 20);
     }
 
     @Test
-/* //Поиск в гугле
-       public void myFirstTest() {
-        driver.navigate().to("http://www.google.com");
-        driver.findElement(By.name("q")).sendKeys("webdriver");
-        driver.findElement(By.name("btnG")).click();
-        wait.until(titleIs("webdriver - Google Search"));
+    public void Login() {
+        driver.navigate().to("https://iportal-integration.azurewebsites.net/ng/Login");
+        wait.until(titleIs("Log in"));
+        driver.findElement(By.id("UserName")).sendKeys("alexandra.ilianova@imparta.com");
+        driver.findElement(By.id("Password")).sendKeys("AZsxdc1234");
+        //driver.findElement(By.cssSelector("btn.btn-success.btn-block")).click();
+
+        //btn btn-success btn-block
     }
-*/
+
+    /*   @Test
+    //Поиск в гугле
+          public void myFirstTest() {
+           driver.navigate().to("http://www.google.com");
+           driver.findElement(By.name("q")).sendKeys("webdriver");
+           driver.findElement(By.name("btnG")).click();
+           wait.until(titleIs("webdriver - Google Search"));
+       }
+   */
     @After
     public void stop() {
         driver.quit();
