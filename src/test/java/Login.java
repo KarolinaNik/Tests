@@ -35,10 +35,10 @@ public class Login {
         driver.findElement(By.id("Password")).sendKeys("AZsxdc1234");
         driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();  //class name = "btn btn-success btn-block", Webdriver problem with spaces inside class names
         driver.findElement(By.cssSelector("span.hidden-xs.usersFullname"));
+        Assert.assertEquals(driver.findElement(By.cssSelector("span.hidden-xs.usersFullname")).getAttribute("innerText"), "Alexandra Ilianova ");
+
         //Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
 
-        //driver.findElement(By.linkText("Admin")).click();
-        //driver.findElement(By.cssSelector("span.").click();
     }
 
 
