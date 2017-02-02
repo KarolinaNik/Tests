@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /**
  * Created by Alexandra on 27/01/2017.
@@ -37,10 +38,28 @@ public class Login {
         driver.findElement(By.cssSelector("span.hidden-xs.usersFullname"));
         Assert.assertEquals(driver.findElement(By.cssSelector("span.hidden-xs.usersFullname")).getAttribute("innerText"), "Alexandra Ilianova ");
 
-        //Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
+        //creating new activity
+        driver.findElement(By.partialLinkText("Admin")).click();
+        wait.until(presenceOfElementLocated(By.partialLinkText("Structure")));
+        driver.findElement(By.partialLinkText("Structure")).click();
+        wait.until(titleIs("Admin | Structure"));
+
+        //tree navigation
+        wait.until(presenceOfElementLocated(By.cssSelector("i.jstree-icon.jstree-ocl"))); //_not assigned yet
+        driver.findElement(By.id("c1084_anchor")).click();
+        wait.until(presenceOfElementLocated(By.id("d3133_anchor"))); //_not assigned yet
+        driver.findElement(By.id("d3133_anchor")).click();
+        wait.until(presenceOfElementLocated(By.id("a109_anchor"))); //Imparta Internal Sales Academy
+        driver.findElement(By.id("a109_anchor")).click();
+
+        //wait.until(presenceOfElementLocated(By.partialLinkText("New Activity"))); //New Activity
+
 
     }
 
+
+    // Проверки:
+    // Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
 
     /*   @Test
     //Search in google
