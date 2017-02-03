@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
+
 /**
  * Created by Alexandra on 27/01/2017.
  */
@@ -26,10 +27,13 @@ public class Login {
         System.setProperty("webdriver.chrome.driver", "C:\\Tools\\selenium drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 20);
+
     }
 
     @Test
     public void Login() {
+
+        //Login
         driver.navigate().to("https://iportal-integration.azurewebsites.net/ng/Login");
         wait.until(titleIs("Log in"));
         driver.findElement(By.id("UserName")).sendKeys("alexandra.ilianova@imparta.com");
@@ -38,38 +42,27 @@ public class Login {
         driver.findElement(By.cssSelector("span.hidden-xs.usersFullname"));
         Assert.assertEquals(driver.findElement(By.cssSelector("span.hidden-xs.usersFullname")).getAttribute("innerText"), "Alexandra Ilianova ");
 
-        //creating new activity
+        //Navigating to Admin => Structure
         driver.findElement(By.partialLinkText("Admin")).click();
         wait.until(presenceOfElementLocated(By.partialLinkText("Structure")));
         driver.findElement(By.partialLinkText("Structure")).click();
         wait.until(titleIs("Admin | Structure"));
 
         //tree navigation
-        wait.until(presenceOfElementLocated(By.cssSelector("i.jstree-icon.jstree-ocl"))); //_not assigned yet
-        driver.findElement(By.id("c1084_anchor")).click();
-        wait.until(presenceOfElementLocated(By.id("d3133_anchor"))); //_not assigned yet
-        driver.findElement(By.id("d3133_anchor")).click();
-        wait.until(presenceOfElementLocated(By.id("a109_anchor"))); //Imparta Internal Sales Academy
-        driver.findElement(By.id("a109_anchor")).click();
+    /*    wait.until(presenceOfElementLocated(By.cssSelector("i.jstree-icon.jstree-ocl"))); //_not assigned yet
+        driver.findElement(By.cssSelector("i.jstree-icon.jstree-ocl")).click();
 
-        //wait.until(presenceOfElementLocated(By.partialLinkText("New Activity"))); //New Activity
+        wait.until(presenceOfElementLocated(By.cssSelector("a#c1084_anchor"))); //_not assigned yet
+        driver.findElement(By.cssSelector("a#c1084_anchor")).click();
 
+        driver.findElements(By.className("i.jstree-icon.jstree-ocl"));
+    */
 
     }
-
 
     // Проверки:
     // Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
 
-    /*   @Test
-    //Search in google
-          public void myFirstTest() {
-           driver.navigate().to("http://www.google.com");
-           driver.findElement(By.name("q")).sendKeys("webdriver");
-           driver.findElement(By.name("btnG")).click();
-           wait.until(titleIs("webdriver - Google Search"));
-       }
-   */
     @After
     public void stop() {
         driver.quit();
