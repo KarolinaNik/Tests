@@ -22,22 +22,27 @@ public class Login {
     private WebDriver driver;
     private WebDriverWait wait;
 
+    private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
+    private String user = "alexandra.ilianova@imparta.com";
+    private String password = "AZsxdc1234";
+    private String client = "Test Client 12";
+    private String division = "Test Division 11";
+
     @Before
     public void start() {
         System.setProperty("webdriver.chrome.driver", "C:\\Tools\\selenium drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 20);
-
     }
 
     @Test
     public void Login() {
 
         //Login
-        driver.navigate().to("https://iportal-integration.azurewebsites.net/ng/Login");
+        driver.navigate().to(home_url);
         wait.until(titleIs("Log in"));
-        driver.findElement(By.id("UserName")).sendKeys("alexandra.ilianova@imparta.com");
-        driver.findElement(By.id("Password")).sendKeys("AZsxdc1234");
+        driver.findElement(By.id("UserName")).sendKeys(user);
+        driver.findElement(By.id("Password")).sendKeys(password);
         driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();  //class name = "btn btn-success btn-block", Webdriver problem with spaces inside class names
         driver.findElement(By.cssSelector("span.hidden-xs.usersFullname"));
         Assert.assertEquals(driver.findElement(By.cssSelector("span.hidden-xs.usersFullname")).getAttribute("innerText"), "Alexandra Ilianova ");
@@ -48,15 +53,27 @@ public class Login {
         driver.findElement(By.partialLinkText("Structure")).click();
         wait.until(titleIs("Admin | Structure"));
 
-        //tree navigation
-    /*    wait.until(presenceOfElementLocated(By.cssSelector("i.jstree-icon.jstree-ocl"))); //_not assigned yet
-        driver.findElement(By.cssSelector("i.jstree-icon.jstree-ocl")).click();
+        //add new client
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
+        driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
 
-        wait.until(presenceOfElementLocated(By.cssSelector("a#c1084_anchor"))); //_not assigned yet
-        driver.findElement(By.cssSelector("a#c1084_anchor")).click();
+        wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field-md")));
+        driver.findElement(By.cssSelector("input#Name.form-field-md")).sendKeys(client);
 
-        driver.findElements(By.className("i.jstree-icon.jstree-ocl"));
-    */
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
+        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
+
+        //add new division
+        wait.until(presenceOfElementLocated(By.cssSelector(" li.icon-stylized-add-white")));
+        driver.findElement(By.cssSelector(" li.icon-stylized-add-white")).click();
+
+        wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field")));
+        driver.findElement(By.cssSelector("input#Name.form-field")).sendKeys(division);
+
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
+        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
+
+
 
     }
 
@@ -65,7 +82,7 @@ public class Login {
 
     @After
     public void stop() {
-        driver.quit();
+        //  driver.quit();
         driver = null;
     }
 }
