@@ -17,7 +17,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
  */
 
 
-public class Login {
+public class Scenario_1 {
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -25,7 +25,7 @@ public class Login {
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "AZsxdc1234";
-    private String client = "Test Client 13";
+    private String client = "Test Client 14";
     private String division = "Test Division 11";
 
     @Before
@@ -36,7 +36,7 @@ public class Login {
     }
 
     @Test
-    public void Login() {
+    public void Scenario_1() {
 
         //Login
         driver.navigate().to(home_url);
@@ -72,7 +72,6 @@ public class Login {
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
-
 
 
     }
