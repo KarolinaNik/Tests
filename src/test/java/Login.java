@@ -25,8 +25,8 @@ public class Login {
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "AZsxdc1234";
-    private String client = "Test Client 13";
-    private String division = "Test Division 11";
+    private String client = "Test Client 10";
+    private String division = "Test Division 10";
 
     @Before
     public void start() {

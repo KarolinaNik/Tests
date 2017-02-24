@@ -27,6 +27,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
  6. Add new Activity (@activity) - not working
 
  Post-conditions: clear db
+ delete from Academies where Title = 'Test Academy 10'
  delete from Divisions where Name = 'Test Division 10'
  delete from Clients where Name = 'Test Client 10'
 
@@ -39,7 +40,7 @@ public class Scenario_1 {
     private WebDriverWait wait;
 
     //Input variables definition
-    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE"
+    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE" (full screen needed)
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "AZsxdc1234";
@@ -71,7 +72,7 @@ public class Scenario_1 {
                 break;
         }
         System.out.println("------------- Scenario execution: ------------- ");
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 20);
     }
 
     @Test
@@ -125,7 +126,7 @@ public class Scenario_1 {
 
 
 //5. Add new academy
-     /*   wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
         driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field-lg")));
@@ -135,9 +136,9 @@ public class Scenario_1 {
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
 
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message disappearing
-        System.out.println("Added new academy:  " + academy);
+        System.out.println("Added new academy:   " + academy);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));
-*/
+
 
 //6. Add new activity
 /*        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
