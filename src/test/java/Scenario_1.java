@@ -141,26 +141,26 @@ public class Scenario_1 {
 
 
 //6. Add new activity
-/*        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
         driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field")));
         driver.findElement(By.cssSelector("input#Title.form-field")).sendKeys(activity);
 
-        driver.findElement(By.cssSelector("a.chosen-single")).sendKeys("Enable");
-        driver.findElement(By.cssSelector("a.chosen-single.chosen-default")).sendKeys("English (United States)");
-        driver.findElement(By.cssSelector("input#Ends.form-field-sm.datetimeinput.hasDatepicker.valid")).sendKeys("07/31/2017 00:00");
+        //driver.findElement(By.cssSelector("a.chosen-single")).sendKeys("Enable");
+        //driver.findElement(By.cssSelector("a.chosen-single.chosen-default")).sendKeys("English (United States)");
+        //driver.findElement(By.cssSelector("input#Ends.form-field-sm.datetimeinput.hasDatepicker.valid")).sendKeys("07/31/2017 00:00");
 
         System.out.println("Added new activity: " + activity);
-*/
+
     }
 
     // Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
 
     @After
     public void stop() {
-        driver.quit();
-        driver = null;
+        //  driver.quit();
+        //  driver = null;
         System.out.println("------------- End of scenario. -------------");
     }
 }
