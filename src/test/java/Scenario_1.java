@@ -64,8 +64,9 @@ public class Scenario_1 {
     private String div_country = "United Kingdom";
     private String div_phone = "07777777777";
 
-
     private String academy = "Test Academy 10";
+    private String ac_language = "English (United States)";
+
     private String activity = "Test Activity 10";
 
     @Before
@@ -114,6 +115,7 @@ public class Scenario_1 {
         wait.until(presenceOfElementLocated(By.partialLinkText("Structure")));
         driver.findElement(By.partialLinkText("Structure")).click();
         wait.until(titleIs("Admin | Structure"));
+        wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();             //close left menu
 
 //3. Add new client ----------------------------------------------------------------------------------------------------
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));                             //'New client' button
@@ -122,7 +124,7 @@ public class Scenario_1 {
         wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field-md")));
         driver.findElement(By.cssSelector("input#Name.form-field-md")).sendKeys(client);                                //Fill in "Client" name
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"SelectedClientDirectorID_chosen\"]/a/div/b"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"SelectedClientDirectorID_chosen\"]/a/div/b"))).click(); //Select Client Director
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + client_director + "']"))).click();
 
         if (is_appear_on_reports) {
@@ -141,7 +143,7 @@ public class Scenario_1 {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));       //wait for success message to disappear
 
 //4. Add new division --------------------------------------------------------------------------------------------------
-/*        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));                             //'New division' button
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));                             //'New division' button
         driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field")));
@@ -153,14 +155,14 @@ public class Scenario_1 {
         driver.findElement(By.cssSelector("input#Postcode.form-field-lg")).sendKeys(div_postcode);                      //Fill in 'Postcode'
         driver.findElement(By.cssSelector("input#City.form-field-lg")).sendKeys(div_city);                              //Fill in 'City'
 
-        element = driver.findElement(By.cssSelector("a.chosen-single"));                                                //select 'Country'   NOT WORKING IN FF
-        span_script = "arguments[0].innerText = '" + div_country + "'";
-        ((JavascriptExecutor) driver).executeScript(span_script, element);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Country_chosen\"]/a/span"))).click();    //Select 'Country' @div_country
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + div_country + "']"))).click();
 
         driver.findElement(By.cssSelector("input#PhoneNumber.form-field-lg")).sendKeys(div_phone);                      //Fill in 'Phone Number'
 
 
-        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //clicking "Save"
+//        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //clicking "Save"
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit"))).click();             //clicking "Save"
 
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message to appear
         System.out.println("Added new division:  " + division);                                                                                    //message in console that division is added
@@ -173,6 +175,9 @@ public class Scenario_1 {
 
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field-lg")));
         driver.findElement(By.cssSelector("input#Title.form-field-lg")).sendKeys(academy);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"CultureString_chosen\"]/a/span"))).click();    //Select 'Language' @ac_language
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + ac_language + "']"))).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
