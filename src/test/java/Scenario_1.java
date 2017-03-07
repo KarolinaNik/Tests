@@ -50,7 +50,7 @@ public class Scenario_1 {
     private String password = "AZsxdc1234";
 
     private String client = "Test Client 10";
-    private String client_director = "Mr Simon Martin";   //problem in FF!
+    private String client_director = "Mr Simon Martin";
     private String client_contact_name = "Test Contact";
     private String client_contact_email = "test-client@imparta.com";
     private Boolean is_appear_on_reports = true;
@@ -61,7 +61,7 @@ public class Scenario_1 {
     private String div_adress3 = "Test Adress 3 string";
     private String div_postcode = "SW6 3BN";
     private String div_city = "Test city";
-    private String div_country = "United Kingdom";         //problem in FF!
+    private String div_country = "United Kingdom";
     private String div_phone = "07777777777";
 
 
@@ -122,17 +122,15 @@ public class Scenario_1 {
         wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field-md")));
         driver.findElement(By.cssSelector("input#Name.form-field-md")).sendKeys(client);                                //Fill in "Client" name
 
-        element = driver.findElement(By.cssSelector("a.chosen-single"));                                                //select a "Client Director"   NOT WORKING IN FF
-        span_script = "arguments[0].innerText = '" + client_director + "'";           //((JavascriptExecutor)driver).executeScript("arguments[0].click;", element);
-        ((JavascriptExecutor) driver).executeScript(span_script, element);
-
-
-        driver.findElement(By.cssSelector("input#ContactName.form-field-md")).sendKeys(client_contact_name);            //Fill in "Contact Name"
-        driver.findElement(By.cssSelector("input#ContactEmail.form-field-md")).sendKeys(client_contact_email);          //Fill in "Contact Email"
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"SelectedClientDirectorID_chosen\"]/a/div/b"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + client_director + "']"))).click();
 
         if (is_appear_on_reports) {
             driver.findElement(By.cssSelector("p.checkbox-row")).click();
         }
+
+        driver.findElement(By.cssSelector("input#ContactName.form-field-md")).sendKeys(client_contact_name);            //Fill in "Contact Name"
+        driver.findElement(By.cssSelector("input#ContactEmail.form-field-md")).sendKeys(client_contact_email);          //Fill in "Contact Email"
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //clicking "Save"
@@ -143,7 +141,7 @@ public class Scenario_1 {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));       //wait for success message to disappear
 
 //4. Add new division --------------------------------------------------------------------------------------------------
-        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));                             //'New division' button
+/*        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));                             //'New division' button
         driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field")));
