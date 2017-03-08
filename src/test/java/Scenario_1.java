@@ -43,7 +43,7 @@ public class Scenario_1 {
     private WebDriverWait wait;
 
     //Input variables declaring:
-    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE" 
+    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE"
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "AZsxdc1234";
@@ -136,7 +136,7 @@ public class Scenario_1 {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));       //wait for success message to disappear
 
 //4. Add new division --------------------------------------------------------------------------------------------------
-        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New division' button
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New Division' button
 
         wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field"))).sendKeys(division);               //Fill in 'Division' name
         driver.findElement(By.cssSelector("input#Address1.form-field-lg")).sendKeys(div_adress1);                       //Fill in 'Address 1'
@@ -145,12 +145,12 @@ public class Scenario_1 {
         driver.findElement(By.cssSelector("input#Postcode.form-field-lg")).sendKeys(div_postcode);                      //Fill in 'Postcode'
         driver.findElement(By.cssSelector("input#City.form-field-lg")).sendKeys(div_city);                              //Fill in 'City'
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Country_chosen\"]/a/span"))).click();    //Select 'Country' @div_country
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Country_chosen\"]/a/span"))).click();    //Select 'Country'
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + div_country + "']"))).click();
 
         driver.findElement(By.cssSelector("input#PhoneNumber.form-field-lg")).sendKeys(div_phone);                      //Fill in 'Phone Number'
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit"))).click();        //clicking "Save"
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit"))).click();        //click 'Save'
 
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message to appear
         System.out.println("Added new division:  " + division);                                                                                    //message in console that division is added
@@ -158,49 +158,44 @@ public class Scenario_1 {
 
 
 //5. Add new academy --------------------------------------------------------------------------------------------------
-        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
-        driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New academy' button
 
-        wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field-lg")));
-        driver.findElement(By.cssSelector("input#Title.form-field-lg")).sendKeys(academy);
+        wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field-lg"))).sendKeys(academy);            //Fill in 'Academy' name
+        //driver.findElement(By.cssSelector("input#Title.form-field-lg"))
 
-//      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"CultureString_chosen\"]/a/span"))).click();    //Select 'Language' @ac_language
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".chosen-single > span:nth-child(1)"))).click();    //Select 'Language' @ac_language
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + ac_language + "']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"CultureString_chosen\"]/a/span"))).click();
+        // wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".chosen-single > span:nth-child(1)"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + ac_language + "']"))).click();    //Select 'Language'
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
-        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
+        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             // click 'Save'
 
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message disappearing
-        System.out.println("Added new academy:   " + academy);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message appearing
+        System.out.println("Added new academy:   " + academy);                                                                                     //message in console that academy is added
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
 
 
 //6. Add new activity --------------------------------------------------------------------------------------------------
-        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
-        driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New activity' button
+        //driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
 
-        wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field")));
-        driver.findElement(By.cssSelector("input#Title.form-field")).sendKeys(activity);
-
+        wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field"))).sendKeys(activity);              //Fill in 'Activity Name'
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"activity_setup_product_type_chosen\"]/a/span"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();
-        //driver.findElement(By.cssSelector("a.chosen-single.chosen-default")).sendKeys("English (United States)");
-        //driver.findElement(By.cssSelector("input#Ends.form-field-sm.datetimeinput.hasDatepicker.valid")).sendKeys("07/31/2017 00:00");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Culture_chosen\"]/a/span"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
 
-        driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);
+        driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
-        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
+        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //click 'Save'
 
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message disappearing
-        System.out.println("Added new activity:  " + activity);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message appearing
+        System.out.println("Added new activity:  " + activity);                                                                                    //message in console that activity is added
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
 
     }
 
@@ -213,3 +208,5 @@ public class Scenario_1 {
         System.out.println("------------- End of scenario. -------------");
     }
 }
+
+// To do: all types of activities, enrol participants, launch activity

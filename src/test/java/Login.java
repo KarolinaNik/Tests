@@ -73,12 +73,7 @@ public class Login {
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
 
-
-
     }
-
-    // Проверки:
-    // Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
 
     @After
     public void stop() {
