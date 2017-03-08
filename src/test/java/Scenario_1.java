@@ -26,13 +26,14 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
  3. Add new Client (@client)
  4. Add new Division (@division)
  5. Add new Academy (@academy)
- 6. Add new Activity (@activity) - not working
+ 6. Add new Activity (@activity)
 
  Post-conditions: clear db
- delete from Academies where Title = 'Test Academy 10'
+ delete from OrgStructure where ActivityID in (select ID from Activities where Title = 'Test Activity 10')
+ delete from Activities where Title = 'Test Activity 10'
+ delete from Academies  where Title = 'Test Academy 10'
  delete from Divisions where Name = 'Test Division 10'
- delete from Clients where Name = 'Test Client 10'
-
+ delete from Clients where Name='Test Client 10'
  */
 
 
@@ -40,11 +41,9 @@ public class Scenario_1 {
 
     private WebDriver driver;
     private WebDriverWait wait;
-    private WebElement element;
-    private String span_script;
 
-    //Input variables definition
-    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE" (full screen needed)
+    //Input variables declaring:
+    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE" 
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "AZsxdc1234";
@@ -68,6 +67,10 @@ public class Scenario_1 {
     private String ac_language = "English (United States)";
 
     private String activity = "Test Activity 10";
+    private String act_type = "Enable";
+    private String act_lang = "English (United States)";
+    private String act_date = "08/03/2017 00:00";
+
 
     @Before
     public void start() {
@@ -81,7 +84,7 @@ public class Scenario_1 {
                 System.out.println("Selected browser:    Google Chrome");
                 break;
             case "Mozilla":
-                System.setProperty("webdriver.gecko.driver", "C:\\Tools\\selenium drivers\\geckodriver.exe");
+                //  System.setProperty("webdriver.gecko.driver", "C:\\Tools\\selenium drivers\\geckodriver.exe");
                 driver = new FirefoxDriver();
                 System.out.println("Selected browser:    Mozilla Firefox");
                 break;
@@ -100,29 +103,21 @@ public class Scenario_1 {
 
 //1. Login
         driver.navigate().to(home_url);
-        wait.until(presenceOfElementLocated(By.id("UserName")));
-        driver.findElement(By.id("UserName")).sendKeys(user);
-        driver.findElement(By.id("Password")).clear();
+        wait.until(presenceOfElementLocated(By.id("UserName"))).sendKeys(user);
+        wait.until(presenceOfElementLocated(By.id("Password"))).clear();
         driver.findElement(By.id("Password")).sendKeys(password);
         driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();
-        wait.until(presenceOfElementLocated(By.cssSelector("span.hidden-xs.usersFullname")));
-        //Assert.assertEquals(driver.findElement(By.cssSelector("span.hidden-xs.usersFullname")).getAttribute("innerText"), "Alexandra Ilianova ");
-        //Assert.assertTrue(driver.findElement(By.cssSelector("span.hidden-xs.usersFullname")).getAttribute("innerText").contains("Alexandra Ilianova"));
-
 
 //2. Navigating to Admin => Structure ----------------------------------------------------------------------------------
         driver.findElement(By.partialLinkText("Admin")).click();
-        wait.until(presenceOfElementLocated(By.partialLinkText("Structure")));
-        driver.findElement(By.partialLinkText("Structure")).click();
+        wait.until(presenceOfElementLocated(By.partialLinkText("Structure"))).click();
         wait.until(titleIs("Admin | Structure"));
-        wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();             //close left menu
+        wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();                             //close left menu
 
 //3. Add new client ----------------------------------------------------------------------------------------------------
-        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));                             //'New client' button
-        driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New client' button
 
-        wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field-md")));
-        driver.findElement(By.cssSelector("input#Name.form-field-md")).sendKeys(client);                                //Fill in "Client" name
+        wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field-md"))).sendKeys(client);              //Fill in "Client" name
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"SelectedClientDirectorID_chosen\"]/a/div/b"))).click(); //Select Client Director
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + client_director + "']"))).click();
@@ -134,21 +129,16 @@ public class Scenario_1 {
         driver.findElement(By.cssSelector("input#ContactName.form-field-md")).sendKeys(client_contact_name);            //Fill in "Contact Name"
         driver.findElement(By.cssSelector("input#ContactEmail.form-field-md")).sendKeys(client_contact_email);          //Fill in "Contact Email"
 
-        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
-        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //clicking "Save"
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit"))).click();  //clicking "Save"
 
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));   //wait for success message appears
         System.out.println("Added new client:    " + client);                                                           //message in console that client is added
-        //System.out.println("Client's details:" + "    Contact Name=" + client_contact_name + "; Contact Email=" + client_contact_email + "; Client Director=" + client_director + "; Include this client on summary reports=" + is_appear_on_reports);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));       //wait for success message to disappear
 
 //4. Add new division --------------------------------------------------------------------------------------------------
-        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));                             //'New division' button
-        driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New division' button
 
-        wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field")));
-        driver.findElement(By.cssSelector("input#Name.form-field")).sendKeys(division);                                 //Fill in 'Division' name
-
+        wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field"))).sendKeys(division);               //Fill in 'Division' name
         driver.findElement(By.cssSelector("input#Address1.form-field-lg")).sendKeys(div_adress1);                       //Fill in 'Address 1'
         driver.findElement(By.cssSelector("input#Address2.form-field-lg")).sendKeys(div_adress2);                       //Fill in 'Address 2'
         driver.findElement(By.cssSelector("input#Address3.form-field-lg")).sendKeys(div_adress3);                       //Fill in 'Address 3'
@@ -160,23 +150,22 @@ public class Scenario_1 {
 
         driver.findElement(By.cssSelector("input#PhoneNumber.form-field-lg")).sendKeys(div_phone);                      //Fill in 'Phone Number'
 
-
-//        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //clicking "Save"
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit"))).click();             //clicking "Save"
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit"))).click();        //clicking "Save"
 
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message to appear
         System.out.println("Added new division:  " + division);                                                                                    //message in console that division is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
 
 
-//5. Add new academy
+//5. Add new academy --------------------------------------------------------------------------------------------------
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
         driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field-lg")));
         driver.findElement(By.cssSelector("input#Title.form-field-lg")).sendKeys(academy);
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"CultureString_chosen\"]/a/span"))).click();    //Select 'Language' @ac_language
+//      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"CultureString_chosen\"]/a/span"))).click();    //Select 'Language' @ac_language
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".chosen-single > span:nth-child(1)"))).click();    //Select 'Language' @ac_language
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + ac_language + "']"))).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
@@ -187,19 +176,32 @@ public class Scenario_1 {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));
 
 
-//6. Add new activity
-/*        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
+//6. Add new activity --------------------------------------------------------------------------------------------------
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white")));
         driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field")));
         driver.findElement(By.cssSelector("input#Title.form-field")).sendKeys(activity);
 
-        //driver.findElement(By.cssSelector("a.chosen-single")).sendKeys("Enable");
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"activity_setup_product_type_chosen\"]/a/span"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();
         //driver.findElement(By.cssSelector("a.chosen-single.chosen-default")).sendKeys("English (United States)");
         //driver.findElement(By.cssSelector("input#Ends.form-field-sm.datetimeinput.hasDatepicker.valid")).sendKeys("07/31/2017 00:00");
 
-        System.out.println("Added new activity: " + activity);
-*/
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Culture_chosen\"]/a/span"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();
+
+        driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
+
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
+        driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();
+
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message disappearing
+        System.out.println("Added new activity:  " + activity);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));
+
     }
 
     // Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
