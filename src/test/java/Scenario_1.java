@@ -84,7 +84,7 @@ public class Scenario_1 {
                 System.out.println("Selected browser:    Google Chrome");
                 break;
             case "Mozilla":
-                //  System.setProperty("webdriver.gecko.driver", "C:\\Tools\\selenium drivers\\geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", "C:\\Tools\\selenium drivers\\geckodriver.exe");
                 driver = new FirefoxDriver();
                 System.out.println("Selected browser:    Mozilla Firefox");
                 break;
@@ -109,7 +109,7 @@ public class Scenario_1 {
         driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();
 
 //2. Navigating to Admin => Structure ----------------------------------------------------------------------------------
-        driver.findElement(By.partialLinkText("Admin")).click();
+        wait.until(presenceOfElementLocated(By.partialLinkText("Admin"))).click();
         wait.until(presenceOfElementLocated(By.partialLinkText("Structure"))).click();
         wait.until(titleIs("Admin | Structure"));
         wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();                             //close left menu
@@ -203,8 +203,8 @@ public class Scenario_1 {
 
     @After
     public void stop() {
-        //  driver.quit();
-        //  driver = null;
+        driver.quit();
+        driver = null;
         System.out.println("------------- End of scenario. -------------");
     }
 }
