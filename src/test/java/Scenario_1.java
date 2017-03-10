@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
@@ -70,6 +71,11 @@ public class Scenario_1 {
     private String act_type = "Enable";
     private String act_lang = "English (United States)";
     private String act_date = "08/03/2017 00:00";
+
+    private String usr_email = "alexandra.ilianova@imparta.com";
+    private String usr_firstName = "Alexandra";
+    private String usr_lastName = "Alexandra";
+
 
 
     @Before
@@ -197,14 +203,31 @@ public class Scenario_1 {
         System.out.println("Added new activity:  " + activity);                                                                                    //message in console that activity is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
 
+//7. Add participant --------------------------------------------------------------------------------------------------
+
+        wait.until(presenceOfElementLocated(By.cssSelector("#structure-management-toolbar > ul > li.th-menu-white"))).click();
+        wait.until(presenceOfElementLocated(By.className("icon-stylized-add-user-white"))).click();
+
+        wait.until(presenceOfElementLocated(By.id("EmailAddress"))).sendKeys(usr_email);
+        wait.until(presenceOfElementLocated(By.id("Firstname"))).sendKeys(usr_firstName);
+        wait.until(presenceOfElementLocated(By.id("Lastname"))).sendKeys(usr_lastName);
+
+        //has no manager (!)
+
+        wait.until(presenceOfElementLocated(By.cssSelector("#structure-management-toolbar > ul > li.icon-stylized-circle-ok-white.StructureFormSubmit")));
+        driver.findElement(By.cssSelector("#structure-management-toolbar > ul > li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //click 'Save'
+
+        System.out.println("Enrolled new user:   " + usr_firstName + " " + usr_lastName);                                                                                    //message in console that activity is added
+
+
     }
 
     // Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
 
     @After
     public void stop() {
-        driver.quit();
-        driver = null;
+        //    driver.quit();
+        //    driver = null;
         System.out.println("------------- End of scenario. -------------");
     }
 }
