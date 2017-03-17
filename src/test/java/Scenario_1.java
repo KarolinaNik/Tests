@@ -2,6 +2,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
+
 
 
 /**
@@ -40,9 +43,10 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 
 public class Scenario_1 {
 
+    //
+    LoginPage loginPage;
     private WebDriver driver;
     private WebDriverWait wait;
-
     //Input variables declaring:
     private String browser = "Chrome"; //"Chrome", "Mozilla", "IE"
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
@@ -108,11 +112,14 @@ public class Scenario_1 {
     public void Scenario_1() {
 
 //1. Login
-        driver.navigate().to(home_url);
+        loginPage = new LoginPage(driver);
+        loginPage.openLoginPage(home_url, user, password);
+        /*driver.navigate().to(home_url);
         wait.until(presenceOfElementLocated(By.id("UserName"))).sendKeys(user);
         wait.until(presenceOfElementLocated(By.id("Password"))).clear();
         driver.findElement(By.id("Password")).sendKeys(password);
         driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();
+        */
 
 //2. Navigating to Admin => Structure ----------------------------------------------------------------------------------
         wait.until(presenceOfElementLocated(By.partialLinkText("Admin"))).click();
