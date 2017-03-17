@@ -74,7 +74,7 @@ public class Scenario_1 {
 
     private String usr_email = "alexandra.ilianova@imparta.com";
     private String usr_firstName = "Alexandra";
-    private String usr_lastName = "Alexandra";
+    private String usr_lastName = "Ilianova";
 
 
 
