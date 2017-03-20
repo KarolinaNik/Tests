@@ -28,11 +28,10 @@ public class LoginPage {
 
     public LoginPage(WebDriver currentDriver) {
         this.driver = currentDriver;
-        //          wait = new WebDriverWait(driver,30);
+        wait = new WebDriverWait(driver, 30);
     }
 
     public void openLoginPage(String url, String user, String pass) {
-
         driver.navigate().to(url);
         wait.until(presenceOfElementLocated(By.id("UserName"))).sendKeys(user);
         wait.until(presenceOfElementLocated(By.id("Password"))).clear();
@@ -41,13 +40,4 @@ public class LoginPage {
 
     }
 
-
-/*
-    driver.navigate().to(home_url);
-        wait.until(presenceOfElementLocated(By.id("UserName"))).sendKeys(user);
-        wait.until(presenceOfElementLocated(By.id("Password"))).clear();
-        driver.findElement(By.id("Password")).sendKeys(password);
-        driver.findElement(By.cssSelector("button.btn.btn-success.btn-block")).click();
-
-*/
 }
