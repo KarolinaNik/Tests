@@ -3,21 +3,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
-
-
 
 /**
  * Created by Alexandra on 27/01/2017.
@@ -111,6 +105,10 @@ public class Scenario_1 {
     }
 
     @Test
+    //Scenario 1:
+    // Testing creating Structure elements: a client, a division, an academy, an activity (Enable)
+    // Enrolling a participant for the activity
+
     public void Scenario_1() {
 
         //1. Login
@@ -130,7 +128,7 @@ public class Scenario_1 {
                 client_contact_email);
 
         //4. Add new division --------------------------------------------------------------------------------------------------
-        structure.addDivision(
+  /*      structure.addDivision(
                 division,
                 div_adress1,
                 div_adress2,
@@ -157,6 +155,14 @@ public class Scenario_1 {
                 usr_email,
                 usr_firstName,
                 usr_lastName);
+
+                */
+        //8. Search for the academy in Structure --------------------------------------------------------------------------------------------------
+
+        wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
+        wait.until(presenceOfElementLocated(By.className("form-field-md"))).sendKeys(academy);
+        wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
+
     }
 
     @After

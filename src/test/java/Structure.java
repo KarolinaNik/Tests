@@ -1,4 +1,3 @@
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,7 +27,7 @@ public class Structure {
         wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();
     }
 
-    public boolean addClient(String client, String client_director, Boolean is_appear_on_reports, String client_contact_name, String client_contact_email) {
+    public void addClient(String client, String client_director, Boolean is_appear_on_reports, String client_contact_name, String client_contact_email) {
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New client' button
         wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field-md"))).sendKeys(client);              //Fill in "Client" name
@@ -46,11 +45,11 @@ public class Structure {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));   //wait for success message appears
         System.out.println("Added new client:    " + client);                                                           //message in console that client is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));       //wait for success message to disappear
-        return true;
+
     }
 
 
-    public boolean addDivision(String division, String div_adress1, String div_adress2, String div_adress3, String div_postcode, String div_city, String div_country, String div_phone) {
+    public void addDivision(String division, String div_adress1, String div_adress2, String div_adress3, String div_postcode, String div_city, String div_country, String div_phone) {
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New Division' button
         wait.until(presenceOfElementLocated(By.cssSelector("input#Name.form-field"))).sendKeys(division);               //Fill in 'Division' name
@@ -66,10 +65,9 @@ public class Structure {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message to appear
         System.out.println("Added new division:  " + division);                                                                                    //message in console that division is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
-        return true;
     }
 
-    public boolean addAcademy(String academy, String ac_language) {
+    public void addAcademy(String academy, String ac_language) {
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New academy' button
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field-lg"))).sendKeys(academy);            //Fill in 'Academy' name
@@ -82,10 +80,9 @@ public class Structure {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message appearing
         System.out.println("Added new academy:   " + academy);                                                                                     //message in console that academy is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
-        return true;
     }
 
-    public boolean addActivity(String activity, String act_type, String act_lang, String act_date) {
+    public void addActivity(String activity, String act_type, String act_lang, String act_date) {
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New activity' button
         //driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field"))).sendKeys(activity);              //Fill in 'Activity Name'
@@ -100,11 +97,10 @@ public class Structure {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message appearing
         System.out.println("Added new activity:  " + activity);                                                                                    //message in console that activity is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
-        return true;
     }
 
 
-    public boolean addParticipant(String usr_email, String usr_firstName, String usr_lastName) {
+    public void addParticipant(String usr_email, String usr_firstName, String usr_lastName) {
         wait.until(presenceOfElementLocated(By.cssSelector("#structure-management-toolbar > ul > li.th-menu-white"))).click();
         wait.until(presenceOfElementLocated(By.className("icon-stylized-add-user-white"))).click();
         wait.until(presenceOfElementLocated(By.id("EmailAddress"))).sendKeys(usr_email);
@@ -116,7 +112,6 @@ public class Structure {
         wait.until(presenceOfElementLocated(By.cssSelector("#structure-management-toolbar > ul > li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("#structure-management-toolbar > ul > li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //click 'Save'
         System.out.println("Enrolled new user:   " + usr_firstName + " " + usr_lastName);                                                                   //message in console that activity is added
-        return true;
     }
 
 
