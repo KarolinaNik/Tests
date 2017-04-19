@@ -19,31 +19,24 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
  Scenario 1 for:
  1. Login
  2. Navigate to Admin => Structure
- 3. Add new Client (@client)
- 4. Add new Division (@division)
- 5. Add new Academy (@academy)
- 6. Add new Activity (@activity)
+ 3. Add new Client
+ 4. Add new Division
+ 5. Add new Academy
+ 6. Add new Activity
 
- Post-conditions: clear db
- delete from OrgStructure where ActivityID in (select ID from Activities where Title = 'Test Activity 10')
- delete from Activities where Title = 'Test Activity 10'
- delete from Academies  where Title = 'Test Academy 10'
- delete from Divisions where Name = 'Test Division 10'
- delete from Clients where Name='Test Client 10'
+ Post-conditions: delete testing objects (clear db)
  */
 
 
 public class Scenario_1 {
 
-    //classes:
     LoginPage loginPage;
     Structure structure;
 
-    //webdriver and wait
     private WebDriver driver;
     private WebDriverWait wait;
 
-    //Input variables declaring:
+    //Input test variables:
     private String browser = "Chrome"; //"Chrome", "Mozilla", "IE"
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
@@ -56,9 +49,9 @@ public class Scenario_1 {
     private Boolean is_appear_on_reports = true;
 
     private String division = "Test Division 10";
-    private String div_adress1 = "Test Adress 1 string";
-    private String div_adress2 = "Test Adress 2 string";
-    private String div_adress3 = "Test Adress 3 string";
+    private String div_adress1 = "Test Address 1 string";
+    private String div_adress2 = "Test Address 2 string";
+    private String div_adress3 = "Test Address 3 string";
     private String div_postcode = "SW6 3BN";
     private String div_city = "Test city";
     private String div_country = "United Kingdom";
@@ -70,7 +63,7 @@ public class Scenario_1 {
     private String activity = "Test Activity 10";
     private String act_type = "Enable";
     private String act_lang = "English (United States)";
-    private String act_date = "08/03/2017 00:00";
+    private String act_date = "08/03/2018 00:00";
 
     private String usr_email = "alexandra.ilianova@imparta.com";
     private String usr_firstName = "Alexandra";
@@ -128,7 +121,7 @@ public class Scenario_1 {
                 client_contact_email);
 
         //4. Add new division --------------------------------------------------------------------------------------------------
-  /*      structure.addDivision(
+        structure.addDivision(
                 division,
                 div_adress1,
                 div_adress2,
@@ -156,13 +149,12 @@ public class Scenario_1 {
                 usr_firstName,
                 usr_lastName);
 
-                */
         //8. Search for the academy in Structure --------------------------------------------------------------------------------------------------
 
-        wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
+    /*    wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
         wait.until(presenceOfElementLocated(By.className("form-field-md"))).sendKeys(academy);
         wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
-
+        wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"search-all-clients-results\"]/li"))).click();  */
     }
 
     @After
@@ -173,5 +165,4 @@ public class Scenario_1 {
     }
 }
 
-// To do: all types of activities, enrol participants, launch activity
 // Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);

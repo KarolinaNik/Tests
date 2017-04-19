@@ -84,19 +84,24 @@ public class Structure {
 
     public void addActivity(String activity, String act_type, String act_lang, String act_date) {
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New activity' button
-        //driver.findElement(By.cssSelector("li.icon-stylized-add-white")).click();
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field"))).sendKeys(activity);              //Fill in 'Activity Name'
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"activity_setup_product_type_chosen\"]/a/span"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Culture_chosen\"]/a/span"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
-        driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
+
+        if (act_type == "Enable") {
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Culture_chosen\"]/a/span"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
+            driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
+        }
+        ;
+
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //click 'Save'
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message appearing
         System.out.println("Added new activity:  " + activity);                                                                                    //message in console that activity is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
+        wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();                             //close left navigation bar
     }
 
 
@@ -104,8 +109,8 @@ public class Structure {
         wait.until(presenceOfElementLocated(By.cssSelector("#structure-management-toolbar > ul > li.th-menu-white"))).click();
         wait.until(presenceOfElementLocated(By.className("icon-stylized-add-user-white"))).click();
         wait.until(presenceOfElementLocated(By.id("EmailAddress"))).sendKeys(usr_email);
-        wait.until(presenceOfElementLocated(By.id("Firstname"))).sendKeys(usr_firstName);
-        wait.until(presenceOfElementLocated(By.id("Lastname"))).sendKeys(usr_lastName);
+        wait.until(presenceOfElementLocated(By.id("FirstName"))).sendKeys(usr_firstName);
+        wait.until(presenceOfElementLocated(By.id("LastName"))).sendKeys(usr_lastName);
 
         //has no manager (!)
 

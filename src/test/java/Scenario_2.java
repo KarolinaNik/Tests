@@ -81,8 +81,8 @@ public class Scenario_2 {
 
     @After
     public void stop() {
-        // driver.quit();
-        // driver = null;
+        driver.quit();
+        driver = null;
         System.out.println("------------- End of scenario. -------------");
     }
 }
