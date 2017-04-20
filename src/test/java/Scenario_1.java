@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -37,7 +38,7 @@ public class Scenario_1 {
     private WebDriverWait wait;
 
     //Input test variables:
-    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE"
+    private String browser = "Chrome"; //"Chrome" (only), "Mozilla", "IE"
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "AZsxdc1234";
@@ -76,7 +77,7 @@ public class Scenario_1 {
 
         switch (browser) {
             case "Chrome":
-                System.setProperty("webdriver.chrome.driver", "C:\\Tools\\selenium drivers\\chromedriver.exe");
+                //System.setProperty("webdriver.chrome.driver", "C:\\Tools\\selenium drivers\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--start-maximized");
                 driver = new ChromeDriver(options);
@@ -88,7 +89,7 @@ public class Scenario_1 {
                 System.out.println("Selected browser:    Mozilla Firefox");
                 break;
             case "IE":
-                System.setProperty("webdriver.ie.driver", "C:\\Tools\\selenium drivers\\IEDriverServer.exe");
+                //System.setProperty("webdriver.ie.driver", "C:\\Tools\\selenium drivers\\IEDriverServer.exe");
                 driver = new InternetExplorerDriver();
                 System.out.println("Selected browser:    Internet Explorer");
                 break;
@@ -151,16 +152,31 @@ public class Scenario_1 {
 
         //8. Search for the academy in Structure --------------------------------------------------------------------------------------------------
 
-    /*    wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
-        wait.until(presenceOfElementLocated(By.className("form-field-md"))).sendKeys(academy);
+  /*      wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
+        wait.until(presenceOfElementLocated(By.className("form-field-md"))).sendKeys(usr_email);
         wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
-        wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"search-all-clients-results\"]/li"))).click();  */
+        wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"search-all-clients-results\"]/li"))).click();
+
+        String txt = usr_firstName + " " + usr_lastName + " (" + usr_email + ") - (" + academy + "\\" + activity + ")";
+        String txt2 = "Alexandra Ilianova (alexandra.ilianova@imparta.com) - (Imparta Internal\\Activity_24_Diagnostic with SP_4766)";
+        //"Alexandra Ilianova (alexandra.ilianova@imparta.com) - (Test Academy 10\Test Activity 10)";
+        WebElement el = driver.findElement(By.xpath("//div[@id = 'search-all-results']/descendant::li[text() = '" + txt2 + "']"));
+       // el.click();
+
+*/
+        /*
+String text = "AppraisersGroupTest";
+WebElement el = driver.findElement(By.xpath("//div[@id = 'colLeft_OrderGroups']/descendant::li[text() = '" + text + "']"));
+el.click();
+http://stackoverflow.com/questions/38212644/selenium-select-item-from-list-by-the-ul-li-value-text
+        */
+
     }
 
     @After
     public void stop() {
-        driver.quit();
-        driver = null;
+        //  driver.quit();
+        //  driver = null;
         System.out.println("------------- End of scenario. -------------");
     }
 }

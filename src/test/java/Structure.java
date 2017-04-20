@@ -71,9 +71,8 @@ public class Structure {
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New academy' button
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field-lg"))).sendKeys(academy);            //Fill in 'Academy' name
-        //driver.findElement(By.cssSelector("input#Title.form-field-lg"))
+
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"CultureString_chosen\"]/a/span"))).click();
-        // wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".chosen-single > span:nth-child(1)"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + ac_language + "']"))).click();    //Select 'Language'
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             // click 'Save'
