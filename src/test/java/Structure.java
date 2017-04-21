@@ -46,8 +46,10 @@ public class Structure {
         System.out.println("Added new client:    " + client);                                                           //message in console that client is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));       //wait for success message to disappear
 
+        System.out.println("                     Client Director: " + client_director);
+        System.out.println("                     Contact Name:    " + client_contact_name);
+        System.out.println("                     Contact Email:   " + client_contact_email);
     }
-
 
     public void addDivision(String division, String div_adress1, String div_adress2, String div_adress3, String div_postcode, String div_city, String div_country, String div_phone) {
 
@@ -65,6 +67,15 @@ public class Structure {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message to appear
         System.out.println("Added new division:  " + division);                                                                                    //message in console that division is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
+
+        System.out.println("                     Address 1:       " + div_adress1);
+        System.out.println("                     Address 2:       " + div_adress2);
+        System.out.println("                     Address 3:       " + div_adress3);
+        System.out.println("                     Postcode:        " + div_postcode);
+        System.out.println("                     City:            " + div_city);
+        System.out.println("                     Country:         " + div_country);
+        System.out.println("                     Phone:           " + div_phone);
+
     }
 
     public void addAcademy(String academy, String ac_language) {
@@ -79,6 +90,10 @@ public class Structure {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message appearing
         System.out.println("Added new academy:   " + academy);                                                                                     //message in console that academy is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
+
+        System.out.println("                     Language:        " + ac_language);
+        System.out.println("                     Results viewers: None");
+        System.out.println("                     Icons:           None");
     }
 
     public void addActivity(String activity, String act_type, String act_lang, String act_date) {
@@ -101,6 +116,9 @@ public class Structure {
         System.out.println("Added new activity:  " + activity);                                                                                    //message in console that activity is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
         wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();                             //close left navigation bar
+        System.out.println("                     Type:            " + act_type);
+        System.out.println("                     Language:        " + act_lang);
+        System.out.println("                     End Date:        " + act_date);
     }
 
 

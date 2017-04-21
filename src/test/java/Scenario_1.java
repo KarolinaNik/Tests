@@ -95,7 +95,7 @@ public class Scenario_1 {
                 break;
         }
         System.out.println("------------- Scenario execution: ------------- ");
-        wait = new WebDriverWait(driver, 30);
+        wait = new WebDriverWait(driver, 60);
     }
 
     @Test
@@ -175,8 +175,8 @@ http://stackoverflow.com/questions/38212644/selenium-select-item-from-list-by-th
 
     @After
     public void stop() {
-        //  driver.quit();
-        //  driver = null;
+        driver.quit();
+        driver = null;
         System.out.println("------------- End of scenario. -------------");
     }
 }
