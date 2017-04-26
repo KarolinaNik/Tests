@@ -43,12 +43,21 @@ public class Structure {
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit"))).click();  //clicking "Save"
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));   //wait for success message appears
-        System.out.println("Added new client:    " + client);                                                           //message in console that client is added
+        System.out.println("Added new client:    " + client);                                                                                        //message in console that client is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));       //wait for success message to disappear
 
         System.out.println("                     Client Director: " + client_director);
         System.out.println("                     Contact Name:    " + client_contact_name);
-        System.out.println("                     Contact Email:   " + client_contact_email);
+        System.out.println("                     Contact Email:   " + client_contact_email + "\n");
+    }
+
+    public void deleteClient(String client) {
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-delete"))).click();                     //'Delete client' button
+
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for deletion success message appearing
+        System.out.println("Deleted client:      " + client + "\n");                                                                                          //message in console that client is deleted
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
+
     }
 
     public void addDivision(String division, String div_adress1, String div_adress2, String div_adress3, String div_postcode, String div_city, String div_country, String div_phone) {
@@ -74,7 +83,16 @@ public class Structure {
         System.out.println("                     Postcode:        " + div_postcode);
         System.out.println("                     City:            " + div_city);
         System.out.println("                     Country:         " + div_country);
-        System.out.println("                     Phone:           " + div_phone);
+        System.out.println("                     Phone:           " + div_phone + "\n");
+
+    }
+
+    public void deleteDivision(String division) {
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-delete"))).click();                     //'Delete division' button
+
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for deletion success message appearing
+        System.out.println("Deleted division:    " + division);                                                                                      //message in console that division is deleted
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
 
     }
 
@@ -93,7 +111,17 @@ public class Structure {
 
         System.out.println("                     Language:        " + ac_language);
         System.out.println("                     Results viewers: None");
-        System.out.println("                     Icons:           None");
+        System.out.println("                     Icons:           None \n");
+
+    }
+
+    public void deleteAcademy(String academy) {
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-delete"))).click();                     //'Delete activity' button
+
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for deletion success message appearing
+        System.out.println("Deleted academy:     " + academy);                                                                                        //message in console that academy is deleted
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
+
     }
 
     public void addActivity(String activity, String act_type, String act_lang, String act_date) {
@@ -118,9 +146,17 @@ public class Structure {
         wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();                             //close left navigation bar
         System.out.println("                     Type:            " + act_type);
         System.out.println("                     Language:        " + act_lang);
-        System.out.println("                     End Date:        " + act_date);
+        System.out.println("                     End Date:        " + act_date + "\n");
     }
 
+    public void deleteActivity(String activity) {
+        wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-delete"))).click();                     //'Delete activity' button
+
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for deletion success message appearing
+        System.out.println("Deleted activity:    " + activity);                                                                                      //message in console that activity is deleted
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
+
+    }
 
     public void addParticipant(String usr_email, String usr_firstName, String usr_lastName) {
         wait.until(presenceOfElementLocated(By.cssSelector("#structure-management-toolbar > ul > li.th-menu-white"))).click();
@@ -132,8 +168,8 @@ public class Structure {
         //has no manager (!)
 
         wait.until(presenceOfElementLocated(By.cssSelector("#structure-management-toolbar > ul > li.icon-stylized-circle-ok-white.StructureFormSubmit")));
-        driver.findElement(By.cssSelector("#structure-management-toolbar > ul > li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //click 'Save'
-        System.out.println("Enrolled new user:   " + usr_firstName + " " + usr_lastName);                                                                   //message in console that activity is added
+        driver.findElement(By.cssSelector("#structure-management-toolbar > ul > li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();       //click 'Save'
+        System.out.println("Enrolled new user:   " + usr_firstName + " " + usr_lastName + "\n");                                                       //message in console that activity is added
     }
 
 

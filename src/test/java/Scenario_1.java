@@ -43,6 +43,7 @@ public class Scenario_1 {
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "AZsxdc1234";
 
+    private boolean delete_mode = true;
     private String client = "Test Client 10";
     private String client_director = "Mr Simon Martin";
     private String client_contact_name = "Test Contact";
@@ -81,20 +82,20 @@ public class Scenario_1 {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--start-maximized");
                 driver = new ChromeDriver(options);
-                System.out.println("Selected browser:    Google Chrome");
+                System.out.println("Selected browser:    Google Chrome \n");
                 break;
             case "Mozilla":
                 System.setProperty("webdriver.gecko.driver", "C:\\Tools\\selenium drivers\\geckodriver.exe");
                 driver = new FirefoxDriver();
-                System.out.println("Selected browser:    Mozilla Firefox");
+                System.out.println("Selected browser:    Mozilla Firefox \n");
                 break;
             case "IE":
                 //System.setProperty("webdriver.ie.driver", "C:\\Tools\\selenium drivers\\IEDriverServer.exe");
                 driver = new InternetExplorerDriver();
-                System.out.println("Selected browser:    Internet Explorer");
+                System.out.println("Selected browser:    Internet Explorer \n");
                 break;
         }
-        System.out.println("------------- Scenario execution: ------------- ");
+        System.out.println("------------- Scenario execution: ------------- \n");
         wait = new WebDriverWait(driver, 60);
     }
 
@@ -149,6 +150,16 @@ public class Scenario_1 {
                 usr_email,
                 usr_firstName,
                 usr_lastName);
+
+        //8. Delete activity --------------------------------------------------------------------------------------------------
+        if (delete_mode) {
+            System.out.println("------------- Deleting objects: --------------- \n");
+            structure.deleteActivity(activity);
+            structure.deleteAcademy(academy);
+            structure.deleteDivision(division);
+            structure.deleteClient(client);
+        }
+
 
         //8. Search for the academy in Structure --------------------------------------------------------------------------------------------------
 
