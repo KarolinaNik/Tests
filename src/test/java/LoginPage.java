@@ -14,7 +14,7 @@ public class LoginPage {
 
     public LoginPage(WebDriver currentDriver) {
         this.driver = currentDriver;
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 120);
     }
 
     public void openLoginPage(String url, String user, String pass) {

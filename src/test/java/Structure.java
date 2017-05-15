@@ -1,5 +1,7 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -125,6 +127,7 @@ public class Structure {
     }
 
     public void addActivity(String activity, String act_type, String act_lang, String act_date) {
+
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New activity' button
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field"))).sendKeys(activity);              //Fill in 'Activity Name'
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"activity_setup_product_type_chosen\"]/a/span"))).click();
@@ -135,6 +138,26 @@ public class Structure {
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
             driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
+        }
+        ;
+
+        if (act_type == "Course Flow") {
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Culture_chosen\"]/a/span"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
+            driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
+
+            // ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+            WebElement element = driver.findElement(By.cssSelector("#Ends"));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+
+            String courseFlow = "(test) New Course Flow";
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"activity-setup-tbl\"]/tbody/tr/td[2]/div/div/div/a/span"))).click();
+
+
+            //#activity-setup-tbl > tbody > tr > td:nth-child(2) > div > div > div > a > span
         }
         ;
 

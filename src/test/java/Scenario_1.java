@@ -4,13 +4,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
@@ -38,12 +43,12 @@ public class Scenario_1 {
     private WebDriverWait wait;
 
     //Input test variables:
-    private String browser = "Chrome"; //"Chrome" (only), "Mozilla", "IE"
+    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE" (n/a)
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "AZsxdc1234";
 
-    private boolean delete_mode = true;
+    private boolean delete_mode = false;
     private String client = "Test Client 10";
     private String client_director = "Mr Simon Martin";
     private String client_contact_name = "Test Contact";
@@ -62,7 +67,7 @@ public class Scenario_1 {
     private String academy = "Test Academy 10";
     private String ac_language = "English (United States)";
 
-    private String activity = "Test Activity 10";
+    private String activity = "Test Activity Enable";
     private String act_type = "Enable";
     private String act_lang = "English (United States)";
     private String act_date = "08/03/2018 00:00";
@@ -78,9 +83,19 @@ public class Scenario_1 {
 
         switch (browser) {
             case "Chrome":
-                //System.setProperty("webdriver.chrome.driver", "C:\\Tools\\selenium drivers\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "C:\\Tools\\selenium drivers\\chromedriver.exe");
+
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--start-maximized");
+                options.addArguments("--disable-web-security");
+                options.addArguments("--no-proxy-server");
+
+                Map<String, Object> prefs = new HashMap<String, Object>();
+                prefs.put("credentials_enable_service", false);
+                prefs.put("profile.password_manager_enabled", false);
+                options.setExperimentalOption("prefs", prefs);
+
+                DesiredCapabilities capabilities = DesiredCapabilities.chrome();
                 driver = new ChromeDriver(options);
                 System.out.println("Selected browser:    Google Chrome \n");
                 break;
@@ -96,7 +111,7 @@ public class Scenario_1 {
                 break;
         }
         System.out.println("------------- Scenario execution: ------------- \n");
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 120);
     }
 
     @Test
@@ -160,21 +175,6 @@ public class Scenario_1 {
             structure.deleteClient(client);
         }
 
-
-        //8. Search for the academy in Structure --------------------------------------------------------------------------------------------------
-
-  /*      wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
-        wait.until(presenceOfElementLocated(By.className("form-field-md"))).sendKeys(usr_email);
-        wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
-        wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"search-all-clients-results\"]/li"))).click();
-
-        String txt = usr_firstName + " " + usr_lastName + " (" + usr_email + ") - (" + academy + "\\" + activity + ")";
-        String txt2 = "Alexandra Ilianova (alexandra.ilianova@imparta.com) - (Imparta Internal\\Activity_24_Diagnostic with SP_4766)";
-        //"Alexandra Ilianova (alexandra.ilianova@imparta.com) - (Test Academy 10\Test Activity 10)";
-        WebElement el = driver.findElement(By.xpath("//div[@id = 'search-all-results']/descendant::li[text() = '" + txt2 + "']"));
-       // el.click();
-
-*/
         /*
 String text = "AppraisersGroupTest";
 WebElement el = driver.findElement(By.xpath("//div[@id = 'colLeft_OrderGroups']/descendant::li[text() = '" + text + "']"));
@@ -182,6 +182,7 @@ el.click();
 http://stackoverflow.com/questions/38212644/selenium-select-item-from-list-by-the-ul-li-value-text
         */
 
+// Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
     }
 
     @After
@@ -192,4 +193,3 @@ http://stackoverflow.com/questions/38212644/selenium-select-item-from-list-by-th
     }
 }
 
-// Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
