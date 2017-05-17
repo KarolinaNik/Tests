@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -15,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
@@ -56,7 +58,8 @@ public class Scenario_2 {
     private String academy = "Test Academy 10";
     private String ac_language = "English (United States)";
 
-    private String activity = "Test Activity 10";
+    private String act_Enable = "Test Activity Enable";
+    private String act_CF = "Test Activity Course Flow";
     private String act_type = "Enable";
     private String act_lang = "English (United States)";
     private String act_date = "08/03/2018 00:00";
@@ -100,7 +103,7 @@ public class Scenario_2 {
                 break;
         }
         System.out.println("------------- Scenario execution: ------------- \n");
-        wait = new WebDriverWait(driver, 120);
+        wait = new WebDriverWait(driver, 30);
     }
 
     @Test
@@ -121,28 +124,35 @@ public class Scenario_2 {
         wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
         wait.until(presenceOfElementLocated(By.name("searchinput"))).sendKeys(academy);
         wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
-        wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"search-all-clients-results\"]/li"))).click();
-        wait.until(presenceOfElementLocated(By.className("icon-stylized-delete")));
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");                                     //scroll to the top
+
+        boolean academyExists = false;
+
+        try {
+            wait.until(presenceOfElementLocated(By.xpath("/*//*[@id=\"search-all-clients-results\"]/li"))).click();
+            wait.until(presenceOfElementLocated(By.className("icon-stylized-delete")));
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
+            academyExists = true;
+            System.out.println("Note: Test Client, Test Division, Test Academy exist");
+        } catch (Exception e) {
+            System.out.println(e);
+            academyExists = false;
+        }
+        ;
+
+        if (!academyExists) {
+            structure.addClient(client, client_director, is_appear_on_reports, client_contact_name, client_contact_email);
+            structure.addDivision(division, div_adress1, div_adress2, div_adress3, div_postcode, div_city, div_country, div_phone);
+            structure.addAcademy(academy, ac_language);
+        }
+        ;
 
 
-        //9. Add new activity (CAN BE IN A LOOP) --------------------------------------------------------------------------------------------------
+        //10. Add new activity (LOOP) --------------------------------------------------------------------------------------------------
         structure.addActivity(
-                //activity,
-                "Test activity 10 Course Flow",
-                //act_type,
+                act_CF,
                 "Course Flow",
                 act_lang,
                 act_date);
-
-
-        /*
-String text = "AppraisersGroupTest";
-WebElement el = driver.findElement(By.xpath("//div[@id = 'colLeft_OrderGroups']/descendant::li[text() = '" + text + "']"));
-el.click();
-http://stackoverflow.com/questions/38212644/selenium-select-item-from-list-by-the-ul-li-value-text
-        */
-
     }
 
     @After

@@ -144,6 +144,7 @@ public class Structure {
         if (act_type == "Course Flow") {
 
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
+
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Culture_chosen\"]/a/span"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
             driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
@@ -155,9 +156,8 @@ public class Structure {
 
             String courseFlow = "(test) New Course Flow";
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"activity-setup-tbl\"]/tbody/tr/td[2]/div/div/div/a/span"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + courseFlow + "']"))).click();
 
-
-            //#activity-setup-tbl > tbody > tr > td:nth-child(2) > div > div > div > a > span
         }
         ;
 
@@ -195,5 +195,13 @@ public class Structure {
         System.out.println("Enrolled new user:   " + usr_firstName + " " + usr_lastName + "\n");                                                       //message in console that activity is added
     }
 
+    public void searchAcademy(String academy) {
+        wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
+        wait.until(presenceOfElementLocated(By.name("searchinput"))).sendKeys(academy);
+        wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
+        wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"search-all-clients-results\"]/li"))).click();
+        wait.until(presenceOfElementLocated(By.className("icon-stylized-delete")));
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");                                     //scroll to the top
+    }
 
 }

@@ -14,7 +14,4 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-server:3.4.0'
 }
 
-dependencies {
-    testCompile 'com.codeborne:selenide:4.2.1'
-}
 

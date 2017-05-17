@@ -72,6 +72,7 @@ public class Scenario_3 {
         System.out.println("------------- Scenario execution: ------------- ");
 
         wait = new WebDriverWait(driver, 120);
+
     }
 
     @Test

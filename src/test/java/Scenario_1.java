@@ -67,8 +67,9 @@ public class Scenario_1 {
     private String academy = "Test Academy 10";
     private String ac_language = "English (United States)";
 
-    private String activity = "Test Activity Enable";
-    private String act_type = "Enable";
+    private String act_Enable = "Test Activity Enable";
+    private String act_CF = "Test Activity Course Flow";
+    //private String act_type = "Enable";
     private String act_lang = "English (United States)";
     private String act_date = "08/03/2018 00:00";
 
@@ -112,6 +113,7 @@ public class Scenario_1 {
         }
         System.out.println("------------- Scenario execution: ------------- \n");
         wait = new WebDriverWait(driver, 120);
+
     }
 
     @Test
@@ -153,10 +155,11 @@ public class Scenario_1 {
                 academy,
                 ac_language);
 
+
         //6. Add new activity --------------------------------------------------------------------------------------------------
         structure.addActivity(
-                activity,
-                act_type,
+                act_Enable,
+                "Enable",
                 act_lang,
                 act_date);
 
@@ -169,20 +172,11 @@ public class Scenario_1 {
         //8. Delete activity --------------------------------------------------------------------------------------------------
         if (delete_mode) {
             System.out.println("------------- Deleting objects: --------------- \n");
-            structure.deleteActivity(activity);
+            structure.deleteActivity(act_Enable);
             structure.deleteAcademy(academy);
             structure.deleteDivision(division);
             structure.deleteClient(client);
         }
-
-        /*
-String text = "AppraisersGroupTest";
-WebElement el = driver.findElement(By.xpath("//div[@id = 'colLeft_OrderGroups']/descendant::li[text() = '" + text + "']"));
-el.click();
-http://stackoverflow.com/questions/38212644/selenium-select-item-from-list-by-the-ul-li-value-text
-        */
-
-// Assert.assertEquals(element.getAttribute(attributeName), expectedAttributeValue);
     }
 
     @After
