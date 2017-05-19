@@ -150,13 +150,35 @@ public class Structure {
             driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
 
-            // ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
             WebElement element = driver.findElement(By.cssSelector("#Ends"));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
 
             String courseFlow = "(test) New Course Flow";
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"activity-setup-tbl\"]/tbody/tr/td[2]/div/div/div/a/span"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + courseFlow + "']"))).click();
+
+        }
+        ;
+
+        if (act_type == "Diagnostic") {
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Culture_chosen\"]/a/span"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
+            driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
+
+            WebElement element = driver.findElement(By.cssSelector("#Ends"));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+
+            //activity specific details
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_NumberOfnominees"))).sendKeys("2");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Contact"))).sendKeys("Test Contact Name");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_ContactEmail"))).sendKeys("TestContactEmail@email.com");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_InviteSubject"))).sendKeys("Test invitiation subject");
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Model"))).click();
 
         }
         ;
@@ -195,13 +217,29 @@ public class Structure {
         System.out.println("Enrolled new user:   " + usr_firstName + " " + usr_lastName + "\n");                                                       //message in console that activity is added
     }
 
-    public void searchAcademy(String academy) {
+    public boolean searchStructure(String object) {
         wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
-        wait.until(presenceOfElementLocated(By.name("searchinput"))).sendKeys(academy);
+        wait.until(presenceOfElementLocated(By.name("searchinput"))).sendKeys(object);
         wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
         wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"search-all-clients-results\"]/li"))).click();
         wait.until(presenceOfElementLocated(By.className("icon-stylized-delete")));
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");                                     //scroll to the top
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
+
+
+        wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
+        wait.until(presenceOfElementLocated(By.name("searchinput"))).sendKeys(object);
+        wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
+
+        try {
+            wait.until(presenceOfElementLocated(By.xpath("/*//*[@id=\"search-all-clients-results\"]/li"))).click();
+            wait.until(presenceOfElementLocated(By.className("icon-stylized-delete")));
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+
     }
 
 }
