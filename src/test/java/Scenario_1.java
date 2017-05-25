@@ -43,10 +43,10 @@ public class Scenario_1 {
     private WebDriverWait wait;
 
     //Input test variables:
-    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE" (n/a)
+    private String browser = "Chrome"; //"Chrome", "Mozilla"
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
-    private String password = "AZsxdc1234";
+    private String password = "Qwerty1234";
 
     private boolean delete_mode = false;
     private String client = "Test Client 10";
@@ -105,11 +105,6 @@ public class Scenario_1 {
                 driver = new FirefoxDriver();
                 System.out.println("Selected browser:    Mozilla Firefox \n");
                 break;
-            case "IE":
-                //System.setProperty("webdriver.ie.driver", "C:\\Tools\\selenium drivers\\IEDriverServer.exe");
-                driver = new InternetExplorerDriver();
-                System.out.println("Selected browser:    Internet Explorer \n");
-                break;
         }
         System.out.println("------------- Scenario execution: ------------- \n");
         wait = new WebDriverWait(driver, 120);
@@ -161,7 +156,8 @@ public class Scenario_1 {
                 act_Enable,
                 "Enable",
                 act_lang,
-                act_date);
+                act_date,
+                "");
 
         //7. Add participant --------------------------------------------------------------------------------------------------
         structure.addParticipant(

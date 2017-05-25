@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -25,10 +26,10 @@ public class Scenario_4 {
     private WebDriverWait wait;
 
     //Input test variables:
-    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE" (n/a)
+    private String browser = "Chrome"; //"Chrome", "Mozilla")
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
-    private String password = "AZsxdc1234";
+    private String password = "Qwerty1234";
 
     private boolean delete_mode = false;
     private String client = "Test Client 10";
@@ -52,6 +53,9 @@ public class Scenario_4 {
     private String act_Enable = "Test Activity Enable";
     private String act_CF = "Test Activity Course Flow";
     private String act_Diag = "Test Activity Diagnostic";
+    private String act_Diag_sp = "Test Activity Diagnostic with Sharepoint";
+    private String sp_url = "https://imparta.sharepointsite.net/portal/dmrtest/Reports/Test_ai";
+
     private String act_type = "Enable";
     private String act_lang = "English (United States)";
     private String act_date = "08/03/2018 00:00";
@@ -87,11 +91,6 @@ public class Scenario_4 {
                 driver = new FirefoxDriver();
                 System.out.println("Selected browser:    Mozilla Firefox \n");
                 break;
-            case "IE":
-                //System.setProperty("webdriver.ie.driver", "C:\\Tools\\selenium drivers\\IEDriverServer.exe");
-                driver = new InternetExplorerDriver();
-                System.out.println("Selected browser:    Internet Explorer \n");
-                break;
         }
         System.out.println("------------- Scenario execution: ------------- \n");
         wait = new WebDriverWait(driver, 30);
@@ -125,22 +124,51 @@ public class Scenario_4 {
         } catch (Exception e) {
             academyExists = false;
         }
-        ;
+
 
         if (!academyExists) {
             structure.addClient(client, client_director, is_appear_on_reports, client_contact_name, client_contact_email);
             structure.addDivision(division, div_adress1, div_adress2, div_adress3, div_postcode, div_city, div_country, div_phone);
             structure.addAcademy(academy, ac_language);
         }
-        ;
 
-
-        //10. Add new activity (LOOP) --------------------------------------------------------------------------------------------------
+        //10. Add new activity Diagnostic --------------------------------------------------------------------------------------------------
         structure.addActivity(
                 act_Diag,
                 "Diagnostic",
                 act_lang,
-                act_date);
+                act_date,
+                "");
+
+
+        //REPEATED! 3. Search for the academy in Structure --------------------------------------------------------------------------------------------------
+
+/*        wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
+        wait.until(presenceOfElementLocated(By.name("searchinput"))).sendKeys(academy);
+        wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
+
+        try {
+            wait.until(presenceOfElementLocated(By.xpath("*//*//**//*[@id=\"search-all-clients-results\"]/li"))).click();
+            wait.until(presenceOfElementLocated(By.className("icon-stylized-delete")));
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
+            academyExists = true;
+        } catch (Exception e) {
+            academyExists = false;
+        }
+
+        if (!academyExists) {
+            structure.addClient(client, client_director, is_appear_on_reports, client_contact_name, client_contact_email);
+            structure.addDivision(division, div_adress1, div_adress2, div_adress3, div_postcode, div_city, div_country, div_phone);
+            structure.addAcademy(academy, ac_language);
+        }
+
+        //11. Add new activity Diagnostic (with Sharepoint)
+        structure.addActivity(
+                act_Diag_sp,
+                "Diagnostic (with Sharepoint)",
+                act_lang,
+                act_date,
+                sp_url);*/
     }
 
     @After

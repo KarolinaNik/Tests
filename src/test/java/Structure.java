@@ -126,7 +126,7 @@ public class Structure {
 
     }
 
-    public void addActivity(String activity, String act_type, String act_lang, String act_date) {
+    public void addActivity(String activity, String act_type, String act_lang, String act_date, String sp_url) {
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-add-white"))).click();                     //'New activity' button
         wait.until(presenceOfElementLocated(By.cssSelector("input#Title.form-field"))).sendKeys(activity);              //Fill in 'Activity Name'
@@ -157,10 +157,14 @@ public class Structure {
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"activity-setup-tbl\"]/tbody/tr/td[2]/div/div/div/a/span"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + courseFlow + "']"))).click();
 
+            String genCertificates = "Yes";
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ActivityParameter_GenerateCertificates_chosen\"]/a"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + genCertificates + "']"))).click();
+
         }
         ;
 
-        if (act_type == "Diagnostic") {
+        if ((act_type == "Diagnostic") || (act_type == "Diagnostic (with Sharepoint)")) {
 
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
 
@@ -173,12 +177,24 @@ public class Structure {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
 
             //activity specific details
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_NumberOfnominees"))).clear();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_NumberOfnominees"))).sendKeys("2");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Contact"))).clear();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Contact"))).sendKeys("Test Contact Name");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_ContactEmail"))).clear();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_ContactEmail"))).sendKeys("TestContactEmail@email.com");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_InviteSubject"))).clear();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_InviteSubject"))).sendKeys("Test invitiation subject");
 
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Model"))).click();
+            // wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Model"))).click();
+
+            WebElement fileInput = driver.findElement(By.id("ActivityParameter_Model"));
+            fileInput.sendKeys("C:/Tools/selenium_input/Superhero Effectiveness.xml");
+
+            if (act_type == "Diagnostic (with Sharepoint)") {
+                wait.until(ExpectedConditions.elementToBeClickable(By.className("textarea.form-field.display-urlbox"))).sendKeys(sp_url);
+            }
+            ;
 
         }
         ;

@@ -23,7 +23,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 /**
  * Created by Alexandra on 27/03/2017.
  * Admin => Structure
- * Search for an academy, add activities of
+ * Search for an academy, add activity of Course Flow type
  */
 public class Scenario_2 {
 
@@ -34,10 +34,10 @@ public class Scenario_2 {
     private WebDriverWait wait;
 
     //Input test variables:
-    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE" (n/a)
+    private String browser = "Chrome"; //"Chrome", "Mozilla"
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
-    private String password = "AZsxdc1234";
+    private String password = "Qwerty1234";
 
     private boolean delete_mode = false;
     private String client = "Test Client 10";
@@ -149,7 +149,8 @@ public class Scenario_2 {
                 act_CF,
                 "Course Flow",
                 act_lang,
-                act_date);
+                act_date,
+                "");
     }
 
     @After

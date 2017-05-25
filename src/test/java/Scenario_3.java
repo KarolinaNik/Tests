@@ -28,10 +28,10 @@ public class Scenario_3 {
     private WebDriverWait wait;
 
     //Input variables declaring:
-    private String browser = "Chrome"; //"Chrome", "Mozilla", "IE"
+    private String browser = "Chrome"; //"Chrome", "Mozilla"
     private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
     private String user = "alexandra.ilianova@imparta.com";
-    private String password = "AZsxdc1234";
+    private String password = "Qwerty1234";
 
     private String name = "(test) New Course Flow";
     private String description = "(test) New Course Flow's description";
@@ -62,11 +62,6 @@ public class Scenario_3 {
                 System.setProperty("webdriver.gecko.driver", "C:\\Tools\\selenium drivers\\geckodriver.exe");
                 driver = new FirefoxDriver();
                 System.out.println("Selected browser:    Mozilla Firefox");
-                break;
-            case "IE":
-                System.setProperty("webdriver.ie.driver", "C:\\Tools\\selenium drivers\\IEDriverServer.exe");
-                driver = new InternetExplorerDriver();
-                System.out.println("Selected browser:    Internet Explorer");
                 break;
         }
         System.out.println("------------- Scenario execution: ------------- ");
