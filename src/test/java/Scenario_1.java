@@ -44,7 +44,7 @@ public class Scenario_1 {
 
     //Input test variables:
     private String browser = "Chrome"; //"Chrome", "Mozilla"
-    private String home_url = "https://iportal-integration.azurewebsites.net/ng/Login";
+    private String home_url = "https://iportal-integration.azurewebsites.net/";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "Qwerty1234";
 
