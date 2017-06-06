@@ -20,6 +20,8 @@ import java.util.Map;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /**
+ * ENABLE ACTIVITY
+ *
  * Created by Alexandra on 27/01/2017.
 
  Scenario 1 for:
@@ -48,7 +50,7 @@ public class Scenario_1 {
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "Qwerty1234";
 
-    private boolean delete_mode = false;
+    private boolean delete_mode = true;
     private String client = "Test Client 10";
     private String client_director = "Mr Simon Martin";
     private String client_contact_name = "Test Contact";

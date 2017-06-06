@@ -21,6 +21,8 @@ import java.util.NoSuchElementException;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /**
+ * COURSE FLOW ACTIVITY
+ *
  * Created by Alexandra on 27/03/2017.
  * Admin => Structure
  * Search for an academy, add activity of Course Flow type

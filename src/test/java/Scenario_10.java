@@ -13,11 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * ADD NEW COURSE FLOW
+ *
  * Created by Alexandra on 15/05/2017.
  * Creating a new Course Flow
  * Admin => Course Flow
  */
-public class Scenario_3 {
+public class Scenario_10 {
 
     //classes:
     LoginPage loginPage;

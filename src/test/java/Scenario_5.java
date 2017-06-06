@@ -1,3 +1,9 @@
+/**
+ * Created by Alexandra on 06/06/2017.
+ */
+
+//  DIAGNOSTIC WITH SHAREPOINT ACTIVITY
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,9 +23,7 @@ import java.util.Map;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
-//  DIAGNOSTIC ACTIVITY
-
-public class Scenario_4 {
+public class Scenario_5 {
 
     LoginPage loginPage;
     Structure structure;
@@ -99,9 +103,9 @@ public class Scenario_4 {
     }
 
     @Test
-    //Scenario 4:
+    //Scenario 5:
 
-    public void Scenario_4() {
+    public void Scenario_5() {
 
         //1. Login
         loginPage = new LoginPage(driver);
@@ -127,20 +131,19 @@ public class Scenario_4 {
             academyExists = false;
         }
 
-
         if (!academyExists) {
             structure.addClient(client, client_director, is_appear_on_reports, client_contact_name, client_contact_email);
             structure.addDivision(division, div_adress1, div_adress2, div_adress3, div_postcode, div_city, div_country, div_phone);
             structure.addAcademy(academy, ac_language);
         }
 
-        //10. Add new activity Diagnostic --------------------------------------------------------------------------------------------------
+        //11. Add new activity Diagnostic (with Sharepoint)
         structure.addActivity(
-                act_Diag,
-                "Diagnostic",
+                act_Diag_sp,
+                "Diagnostic (with Sharepoint)",
                 act_lang,
                 act_date,
-                "");
+                sp_url);
 
     }
 
