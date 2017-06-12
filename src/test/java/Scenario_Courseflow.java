@@ -19,7 +19,7 @@ import java.util.Map;
  * Creating a new Course Flow
  * Admin => Course Flow
  */
-public class Scenario_10 {
+public class Scenario_Courseflow {
 
     //classes:
     LoginPage loginPage;

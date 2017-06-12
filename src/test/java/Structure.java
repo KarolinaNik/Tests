@@ -141,6 +141,16 @@ public class Structure {
         }
         ;
 
+
+/*        if (act_type == "Evaluation Form") {
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/*//*[@id=\"Culture_chosen\"]/a/span"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
+            driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/*//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
+        }
+        ;*/
+
         if (act_type == "Course Flow") {
 
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
@@ -162,7 +172,7 @@ public class Structure {
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + genCertificates + "']"))).click();
 
         }
-        ;
+
 
         if ((act_type == "Diagnostic") || (act_type == "Diagnostic (with Sharepoint)")) {
 
@@ -195,10 +205,55 @@ public class Structure {
                 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).sendKeys(sp_url);
             }
-            ;
-
         }
-        ;
+
+
+        if ((act_type == "Coaching Effectiveness") || (act_type == "Coaching Effectiveness (with Sharepoint)")) {
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_type + "']"))).click();       //Select 'Type'
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"Culture_chosen\"]/a/span"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='" + act_lang + "']"))).click();       //Select 'Language'
+            driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
+
+            WebElement element = driver.findElement(By.cssSelector("#Ends"));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+
+            //activity specific details
+            //wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_NumberOfnominees"))).clear();
+            //wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_NumberOfnominees"))).sendKeys("2");
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_PeriodStart"))).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_PeriodStart"))).sendKeys("01/06/2017");
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_PeriodEnd"))).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_PeriodEnd"))).sendKeys("01/07/2017");
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Target"))).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Target"))).sendKeys("1");
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Slots"))).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Slots"))).sendKeys("4");
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Contact"))).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Contact"))).sendKeys("Test Contact Name");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_ContactEmail"))).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_ContactEmail"))).sendKeys("TestContactEmail@email.com");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_InviteSubject"))).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_InviteSubject"))).sendKeys("Test invitation subject");
+
+            // wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Model"))).click();
+
+            WebElement fileInput = driver.findElement(By.id("ActivityParameter_Model"));
+            fileInput.sendKeys("C:/Tools/selenium_input/Superhero Effectiveness.xml");
+
+            if (act_type == "Diagnostic (with Sharepoint)") {
+                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).sendKeys(sp_url);
+            }
+        }
+
 
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //click 'Save'
