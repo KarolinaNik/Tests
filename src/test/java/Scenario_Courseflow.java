@@ -73,7 +73,7 @@ public class Scenario_Courseflow {
     }
 
     @Test
-    public void Scenario_3() {
+    public void Scenario_Scenario_Courseflow() {
 
         //1. Login ---------------------------------------------------------------------------------------------------------
         loginPage = new LoginPage(driver);

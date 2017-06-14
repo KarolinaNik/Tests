@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,9 +16,11 @@ import java.util.Map;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
-//  DIAGNOSTIC ACTIVITY
+/**
+ * Created by Alexandra on 12/06/2017.
+ */
+public class Scenario_act_cesp {
 
-public class Scenario_4 {
 
     LoginPage loginPage;
     Structure structure;
@@ -28,7 +29,7 @@ public class Scenario_4 {
     private WebDriverWait wait;
 
     //Input test variables:
-    private String browser = "Chrome"; //"Chrome", "Mozilla")
+    private String browser = "Chrome"; //"Chrome", "Mozilla"
     private String home_url = "https://iportal-integration.azurewebsites.net/";
     private String user = "alexandra.ilianova@imparta.com";
     private String password = "Qwerty1234";
@@ -52,15 +53,10 @@ public class Scenario_4 {
     private String academy = "Test Academy 10";
     private String ac_language = "English (United States)";
 
-    private String act_Enable = "Test Activity Enable";
-    private String act_CF = "Test Activity Course Flow";
-    private String act_Diag = "Test Activity Diagnostic";
-    private String act_Diag_sp = "Test Activity Diagnostic with Sharepoint";
-    private String sp_url = "https://imparta.sharepointsite.net/portal/dmrtest/Reports/Test_ai";
-
-    private String act_type = "Enable";
+    private String act_CE = "Test Activity Coaching Effectiveness (with Sharepoint)";
     private String act_lang = "English (United States)";
     private String act_date = "08/03/2018 00:00";
+    private String sp_url = "https://imparta.sharepointsite.net/portal/dmrtest/Reports/Test_ai";
 
     private String usr_email = "alexandra.ilianova@imparta.com";
     private String usr_firstName = "Alexandra";
@@ -93,15 +89,20 @@ public class Scenario_4 {
                 driver = new FirefoxDriver();
                 System.out.println("Selected browser:    Mozilla Firefox \n");
                 break;
+            case "IE":
+                //System.setProperty("webdriver.ie.driver", "C:\\Tools\\selenium drivers\\IEDriverServer.exe");
+                driver = new InternetExplorerDriver();
+                System.out.println("Selected browser:    Internet Explorer \n");
+                break;
         }
         System.out.println("------------- Scenario execution: ------------- \n");
         wait = new WebDriverWait(driver, 30);
     }
 
     @Test
-    //Scenario 4:
+    //Scenario 3:
 
-    public void Scenario_4() {
+    public void Scenario_act_cesp() {
 
         //1. Login
         loginPage = new LoginPage(driver);
@@ -134,16 +135,15 @@ public class Scenario_4 {
             structure.addAcademy(academy, ac_language);
         }
 
-        //10. Add new activity Diagnostic --------------------------------------------------------------------------------------------------
+
+        //10. Add new activity --------------------------------------------------------------------------------------------------
         structure.addActivity(
-                act_Diag,
-                "Diagnostic",
+                act_CE,
+                "Coaching Effectiveness (with Sharepoint)",
                 act_lang,
                 act_date,
-                "");
-
+                sp_url);
     }
-
 
     @After
     public void stop() {
@@ -151,4 +151,5 @@ public class Scenario_4 {
         driver = null;
         System.out.println("------------- End of scenario. -------------");
     }
+
 }

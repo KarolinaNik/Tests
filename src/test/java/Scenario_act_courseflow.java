@@ -1,26 +1,33 @@
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /**
- * Created by Alexandra on 12/06/2017.
+ * COURSE FLOW ACTIVITY
+ *
+ * Created by Alexandra on 27/03/2017.
+ * Admin => Structure
+ * Search for an academy, add activity of Course Flow type
  */
-public class Scenario_3 {
-
+public class Scenario_act_courseflow {
 
     LoginPage loginPage;
     Structure structure;
@@ -53,13 +60,16 @@ public class Scenario_3 {
     private String academy = "Test Academy 10";
     private String ac_language = "English (United States)";
 
-    private String act_CE = "Test Activity Coaching Effectiveness";
+    private String act_Enable = "Test Activity Enable";
+    private String act_CF = "Test Activity Course Flow";
+    private String act_type = "Enable";
     private String act_lang = "English (United States)";
     private String act_date = "08/03/2018 00:00";
 
     private String usr_email = "alexandra.ilianova@imparta.com";
     private String usr_firstName = "Alexandra";
     private String usr_lastName = "Ilianova";
+
 
 
     @Before
@@ -99,9 +109,9 @@ public class Scenario_3 {
     }
 
     @Test
-    //Scenario 3:
+    //Scenario 2:
 
-    public void Scenario_3() {
+    public void Scenario_act_courseflow() {
 
         //1. Login
         loginPage = new LoginPage(driver);
@@ -136,10 +146,10 @@ public class Scenario_3 {
         ;
 
 
-        //10. Add new activity --------------------------------------------------------------------------------------------------
+        //10. Add new activity (LOOP) --------------------------------------------------------------------------------------------------
         structure.addActivity(
-                act_CE,
-                "Coaching Effectiveness",
+                act_CF,
+                "Course Flow",
                 act_lang,
                 act_date,
                 "");
@@ -151,5 +161,4 @@ public class Scenario_3 {
         driver = null;
         System.out.println("------------- End of scenario. -------------");
     }
-
 }

@@ -139,7 +139,7 @@ public class Structure {
             driver.findElement(By.cssSelector("#Ends")).sendKeys(act_date);                                                 //Select 'End Date'
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[3]/button[2]"))).click();
         }
-        ;
+
 
 
 /*        if (act_type == "Evaluation Form") {
@@ -230,6 +230,16 @@ public class Structure {
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_PeriodEnd"))).clear();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_PeriodEnd"))).sendKeys("01/07/2017");
 
+            element = driver.findElement(By.cssSelector("#ActivityParameter_PeriodEnd"));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+
+//            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(11) > td:nth-child(2) > div > ul > li:nth-child(1)"))).click();
+//            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(11) > td:nth-child(2) > div > ul > li:nth-child(2)"))).click();
+//            wait.until(ExpectedConditions.elementToBeClickable(By.name("ActivityParameter_CoachingTypes_NVC_{FAFDB7A8-1ED4-4A94-8349-9A23DBF0F406}"))).click();
+//            wait.until(ExpectedConditions.elementToBeClickable(By.name("ActivityParameter_CoachingTypes_NVC_{81C8B6CC-B5B6-40A0-9A9E-9244F5255EE8}"))).click();
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("nvc-selectall"))).click();
+
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Target"))).clear();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Target"))).sendKeys("1");
 
@@ -240,24 +250,17 @@ public class Structure {
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Contact"))).sendKeys("Test Contact Name");
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_ContactEmail"))).clear();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_ContactEmail"))).sendKeys("TestContactEmail@email.com");
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_InviteSubject"))).clear();
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_InviteSubject"))).sendKeys("Test invitation subject");
 
-            // wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_Model"))).click();
-
-            WebElement fileInput = driver.findElement(By.id("ActivityParameter_Model"));
-            fileInput.sendKeys("C:/Tools/selenium_input/Superhero Effectiveness.xml");
-
-            if (act_type == "Diagnostic (with Sharepoint)") {
+            if (act_type == "Coaching Effectiveness (with Sharepoint)") {
                 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).sendKeys(sp_url);
             }
         }
 
-
         wait.until(presenceOfElementLocated(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")));
         driver.findElement(By.cssSelector("li.icon-stylized-circle-ok-white.StructureFormSubmit")).click();             //click 'Save'
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success"))); //wait for success message appearing
+
         System.out.println("Added new activity:  " + activity);                                                                                    //message in console that activity is added
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));     //wait for success message to disappear
         wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();                             //close left navigation bar
