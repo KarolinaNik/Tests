@@ -103,15 +103,15 @@ public class Scenario_act_ce {
 
     public void Scenario_act_ce() {
 
-        //1. Login
+        // Login
         loginPage = new LoginPage(driver);
         loginPage.openLoginPage(home_url, user, password);
 
-        //2. Navigating to Admin => Structure ----------------------------------------------------------------------------------
+        // Navigating to Admin => Structure ----------------------------------------------------------------------------
         structure = new Structure(driver);
         structure.openStructure();
 
-        //3. Search for the academy in Structure --------------------------------------------------------------------------------------------------
+        // Add new client, division, academy if needed -----------------------------------------------------------------
 
         boolean academyExists;
         wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();

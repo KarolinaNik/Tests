@@ -120,40 +120,38 @@ public class Scenario_act_enable {
 
     public void Scenario_act_enable() {
 
-        //1. Login
+        //Login
         loginPage = new LoginPage(driver);
         loginPage.openLoginPage(home_url, user, password);
 
-        //2. Navigating to Admin => Structure ----------------------------------------------------------------------------------
+        //Navigating to Admin => Structure ----------------------------------------------------------------------------------
         structure = new Structure(driver);
         structure.openStructure();
 
-        //3. Add new client ----------------------------------------------------------------------------------------------------
-        structure.addClient(
-                client,
-                client_director,
-                is_appear_on_reports,
-                client_contact_name,
-                client_contact_email);
+        //Add new client, division, academy if needed ------------------------------------------------------------------
+        boolean academyExists;
+        wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
+        wait.until(presenceOfElementLocated(By.name("searchinput"))).sendKeys(academy);
+        wait.until(presenceOfElementLocated(By.id("searchall-btn"))).click();
 
-        //4. Add new division --------------------------------------------------------------------------------------------------
-        structure.addDivision(
-                division,
-                div_adress1,
-                div_adress2,
-                div_adress3,
-                div_postcode,
-                div_city,
-                div_country,
-                div_phone);
-
-        //5. Add new academy --------------------------------------------------------------------------------------------------
-        structure.addAcademy(
-                academy,
-                ac_language);
+        try {
+            wait.until(presenceOfElementLocated(By.xpath("/*//*[@id=\"search-all-clients-results\"]/li"))).click();
+            wait.until(presenceOfElementLocated(By.className("icon-stylized-delete")));
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
+            academyExists = true;
+        } catch (Exception e) {
+            academyExists = false;
+        }
 
 
-        //6. Add new activity --------------------------------------------------------------------------------------------------
+        if (!academyExists) {
+            structure.addClient(client, client_director, is_appear_on_reports, client_contact_name, client_contact_email);
+            structure.addDivision(division, div_adress1, div_adress2, div_adress3, div_postcode, div_city, div_country, div_phone);
+            structure.addAcademy(academy, ac_language);
+        }
+
+
+        //Add new activity --------------------------------------------------------------------------------------------------
         structure.addActivity(
                 act_Enable,
                 "Enable",
@@ -161,20 +159,20 @@ public class Scenario_act_enable {
                 act_date,
                 "");
 
-        //7. Add participant --------------------------------------------------------------------------------------------------
+        //Add participant --------------------------------------------------------------------------------------------------
         structure.addParticipant(
                 usr_email,
                 usr_firstName,
                 usr_lastName);
 
-        //8. Delete activity --------------------------------------------------------------------------------------------------
-        if (delete_mode) {
+        //Delete activity --------------------------------------------------------------------------------------------------
+/*        if (delete_mode) {
             System.out.println("------------- Deleting objects: --------------- \n");
             structure.deleteActivity(act_Enable);
             structure.deleteAcademy(academy);
             structure.deleteDivision(division);
             structure.deleteClient(client);
-        }
+        }*/
     }
 
     @After

@@ -113,15 +113,15 @@ public class Scenario_act_courseflow {
 
     public void Scenario_act_courseflow() {
 
-        //1. Login
+        // Login
         loginPage = new LoginPage(driver);
         loginPage.openLoginPage(home_url, user, password);
 
-        //2. Navigating to Admin => Structure ----------------------------------------------------------------------------------
+        // Navigating to Admin => Structure ----------------------------------------------------------------------------
         structure = new Structure(driver);
         structure.openStructure();
 
-        //3. Search for the academy in Structure --------------------------------------------------------------------------------------------------
+        // Add new client, division, academy if needed ------------------------------------------------------------------
 
         boolean academyExists;
         wait.until(presenceOfElementLocated(By.id("iCoachNG_anchor"))).click();
@@ -136,14 +136,13 @@ public class Scenario_act_courseflow {
         } catch (Exception e) {
             academyExists = false;
         }
-        ;
+
 
         if (!academyExists) {
             structure.addClient(client, client_director, is_appear_on_reports, client_contact_name, client_contact_email);
             structure.addDivision(division, div_adress1, div_adress2, div_adress3, div_postcode, div_city, div_country, div_phone);
             structure.addAcademy(academy, ac_language);
         }
-        ;
 
 
         //10. Add new activity (LOOP) --------------------------------------------------------------------------------------------------

@@ -14,10 +14,11 @@ public class CourseFlow {
     WebDriver driver;
     WebDriverWait wait;
 
-    public CourseFlow(WebDriver currentDriver) {
+    public CourseFlow(WebDriver driver) {
 
-        this.driver = currentDriver;
+        this.driver = driver;
         wait = new WebDriverWait(driver, 30);
+
     }
 
     public void openCourseFlow() {
@@ -25,7 +26,6 @@ public class CourseFlow {
         wait.until(presenceOfElementLocated(By.partialLinkText("Admin"))).click();
         wait.until(presenceOfElementLocated(By.partialLinkText("Course Flow"))).click();
         wait.until(titleIs("Admin | Course Flow"));
-        // wait.until(presenceOfElementLocated(By.cssSelector("i.fa.fa-bars.fa-2x"))).click();
         wait.until(presenceOfElementLocated(By.id("CourseFlow-new")));
 
     }
@@ -35,7 +35,8 @@ public class CourseFlow {
         wait.until(presenceOfElementLocated(By.id("Title"))).sendKeys(courseflow_name);              //Fill in "Course Flow" name
         wait.until(presenceOfElementLocated(By.id("Description"))).sendKeys(courseflow_descr);       //Fill in "Course Flow" description
 
-      /*  wait.until(presenceOfElementLocated(By.cssSelector("#frmFlowEditor > div.form-horizontal > input.btn.btn-primary"))).click();
+/*
+        wait.until(presenceOfElementLocated(By.cssSelector("#frmFlowEditor > div.form-horizontal > input.btn.btn-primary"))).click();
         wait.until(presenceOfElementLocated(By.className("input#Title.form-control"))).sendKeys("Test Section 1");
 
         wait.until(presenceOfElementLocated(By.className("span.glyphicon.glyphicon-eye-open"))).click();
@@ -43,6 +44,7 @@ public class CourseFlow {
         wait.until(presenceOfElementLocated(By.cssSelector("#BankThreshold"))).sendKeys("10");
         wait.until(presenceOfElementLocated(By.cssSelector("#BankId"))).sendKeys("1");
 */
+
 
         wait.until(presenceOfElementLocated(By.id("CourseFlow-save"))).click();  //clicking "Save"
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));   //wait for success message appears
