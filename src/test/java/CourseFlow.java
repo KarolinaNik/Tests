@@ -17,7 +17,7 @@ public class CourseFlow {
     public CourseFlow(WebDriver driver) {
 
         this.driver = driver;
-        wait = new WebDriverWait(driver, 30);
+        wait = new WebDriverWait(driver, 60);
 
     }
 
@@ -35,20 +35,36 @@ public class CourseFlow {
         wait.until(presenceOfElementLocated(By.id("Title"))).sendKeys(courseflow_name);              //Fill in "Course Flow" name
         wait.until(presenceOfElementLocated(By.id("Description"))).sendKeys(courseflow_descr);       //Fill in "Course Flow" description
 
-/*
-        wait.until(presenceOfElementLocated(By.cssSelector("#frmFlowEditor > div.form-horizontal > input.btn.btn-primary"))).click();
-        wait.until(presenceOfElementLocated(By.className("input#Title.form-control"))).sendKeys("Test Section 1");
+        //Add a course
+        wait.until(presenceOfElementLocated(By.cssSelector("#frmFlowEditor > div.form-horizontal > div:nth-child(4) > div > div > span > button"))).click();
 
-        wait.until(presenceOfElementLocated(By.className("span.glyphicon.glyphicon-eye-open"))).click();
+        driver.findElement(By.cssSelector("#txtSearchCourseText"));
+
+        wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"txtSearchCourseText\"]")));
+        wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"txtSearchCourseText\"]"))).sendKeys("Acceptance Test Course");
+        wait.until(presenceOfElementLocated(By.id("btnSearchCourseText"))).click();
+        wait.until(presenceOfElementLocated(By.partialLinkText("Acceptance Test Course"))).click();
+        wait.until(presenceOfElementLocated(By.id("btnConfirmSelectedCourse"))).click();
+
+
+        // Add Section
+        wait.until(presenceOfElementLocated(By.cssSelector("#frmFlowEditor > div.form-horizontal > input.btn.btn-primary"))).click();
+        wait.until(presenceOfElementLocated(By.cssSelector("input[name^='Sections['"))).sendKeys("Test Section 1");
+        wait.until(presenceOfElementLocated(By.cssSelector("[class$='glyphicon-eye-open'"))).click();
+
 
         wait.until(presenceOfElementLocated(By.cssSelector("#BankThreshold"))).sendKeys("10");
         wait.until(presenceOfElementLocated(By.cssSelector("#BankId"))).sendKeys("1");
-*/
+
+        //Add Course
+        //css:
+        // #section_f4427a23-fa63-4f3e-aa68-786ace24abf0 > div > input
 
 
-        wait.until(presenceOfElementLocated(By.id("CourseFlow-save"))).click();  //clicking "Save"
+        //SAVE:
+        /*wait.until(presenceOfElementLocated(By.id("CourseFlow-save"))).click();  //clicking "Save"
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));   //wait for success message appears
         System.out.println("Added new Course Flow:    " + courseflow_name);                                                           //message in console that client is added
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.notifyjs-bootstrap-base.notifyjs-bootstrap-success")));*/
     }
 }
