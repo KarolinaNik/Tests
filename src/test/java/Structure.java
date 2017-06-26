@@ -202,8 +202,9 @@ public class Structure {
             fileInput.sendKeys("C:/Tools/selenium_input/Superhero Effectiveness.xml");
 
             if (act_type == "Diagnostic (with Sharepoint)") {
-                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).clear();
                 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).sendKeys(sp_url);
+                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).click();
             }
         }
 
@@ -252,7 +253,7 @@ public class Structure {
             wait.until(ExpectedConditions.elementToBeClickable(By.id("ActivityParameter_ContactEmail"))).sendKeys("TestContactEmail@email.com");
 
             if (act_type == "Coaching Effectiveness (with Sharepoint)") {
-                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).clear();
                 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#activity-setup-tbl > tbody > tr:nth-child(8) > td:nth-child(2) > div > textarea"))).sendKeys(sp_url);
             }
         }

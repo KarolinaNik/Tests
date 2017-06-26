@@ -60,9 +60,7 @@ public class Scenario_act_courseflow {
     private String academy = "Test Academy 10";
     private String ac_language = "English (United States)";
 
-    private String act_Enable = "Test Activity Enable";
     private String act_CF = "Test Activity Course Flow";
-    private String act_type = "Enable";
     private String act_lang = "English (United States)";
     private String act_date = "08/03/2018 00:00";
 
